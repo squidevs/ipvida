@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPVONLINE - Plataforma digital do Instituto Pastoral da Vida, oferecendo conteúdo bíblico diário, recursos de acessibilidade e área de membros.">
+    <meta name="keywords" content="bíblia, instituto pastoral, vida, versículo diário, salmo, acessibilidade">
+    <meta name="author" content="Instituto Pastoral da Vida">
+    <meta name="theme-color" content="#2563eb">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="IPVONLINE">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✝️</text></svg>">
+    
+    <title>IPVONLINE - Instituto Pastoral da Vida</title>
+    
+    <!-- Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/globals.css">
+    <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="css/desktop.css" media="screen and (min-width: 769px)">
+</head>
+<body>
+    <!-- Barra de Acessibilidade -->
+    <div id="barra-acessibilidade" class="barra-acessibilidade">
+        <div class="container">
+            <h2 class="sr-only">Ferramentas de Acessibilidade</h2>
+            <div class="acessibilidade-controles">
+                <button id="aumentar-fonte" class="btn-acessibilidade" title="Aumentar tamanho da fonte" aria-label="Aumentar tamanho da fonte">
+                    <span class="material-icons">zoom_in</span>
+                    <span class="btn-text">A+</span>
+                </button>
+                <button id="diminuir-fonte" class="btn-acessibilidade" title="Diminuir tamanho da fonte" aria-label="Diminuir tamanho da fonte">
+                    <span class="material-icons">zoom_out</span>
+                    <span class="btn-text">A-</span>
+                </button>
+                <button id="alto-contraste" class="btn-acessibilidade" title="Ativar/Desativar alto contraste" aria-label="Alternar alto contraste">
+                    <span class="material-icons">contrast</span>
+                    <span class="btn-text">Contraste</span>
+                </button>
+                <button id="leitura-texto" class="btn-acessibilidade" title="Ativar/Pausar leitura do texto" aria-label="Ativar ou pausar leitura do texto">
+                    <span class="material-icons">volume_up</span>
+                    <span class="btn-text">Ouvir</span>
+                </button>
+                <div id="vlibras">
+                    <div vw class="enabled">
+                        <div vw-access-button class="active"></div>
+                        <div vw-plugin-wrapper>
+                            <div class="vw-plugin-top-wrapper"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar container">
+            <div class="navbar-brand">
+                <a href="index.html" class="logo">
+                    <span class="material-icons logo-icon">church</span>
+                    <span class="logo-text">IPVONLINE</span>
+                </a>
+            </div>
+            
+            <button class="navbar-toggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+                <span class="material-icons">menu</span>
+            </button>
+            
+            <div class="navbar-menu">
+                <ul class="navbar-nav">
+                    <li><a href="index.html" class="nav-link active">
+                        <span class="material-icons">home</span>
+                        <span>Início</span>
+                    </a></li>
+                    <li><a href="pages/sobre.html" class="nav-link">
+                        <span class="material-icons">info</span>
+                        <span>Sobre</span>
+                    </a></li>
+                    <li><a href="pages/contato.html" class="nav-link">
+                        <span class="material-icons">contact_mail</span>
+                        <span>Contato</span>
+                    </a></li>
+                    <li><a href="pages/login.html" class="nav-link">
+                        <span class="material-icons">login</span>
+                        <span>Entrar</span>
+                    </a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main" id="conteudo-principal">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Bem-vindo ao Instituto Pastoral da Vida</h1>
+                    <p class="hero-description">
+                        Conecte-se diariamente com a Palavra de Deus através de nossos recursos bíblicos,
+                        versículos inspiradores e uma comunidade dedicada ao crescimento espiritual.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="pages/register.html" class="btn btn-primary">
+                            <span class="material-icons">person_add</span>
+                            <span>Cadastre-se Grátis</span>
+                        </a>
+                        <a href="#versiculo-dia" class="btn btn-secondary">
+                            <span class="material-icons">auto_stories</span>
+                            <span>Ver Versículo do Dia</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Versículo do Dia -->
+        <section id="versiculo-dia" class="versiculo-dia">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="material-icons">today</span>
+                    Versículo do Dia
+                </h2>
+                <div class="versiculo-card" id="card-versiculo">
+                    <div class="loading" id="loading-versiculo">
+                        <div class="spinner"></div>
+                        <p>Carregando versículo...</p>
+                    </div>
+                    <div class="versiculo-content" id="conteudo-versiculo" style="display: none;">
+                        <blockquote class="versiculo-texto" id="texto-versiculo">
+                            <!-- Conteúdo carregado via JavaScript -->
+                        </blockquote>
+                        <cite class="versiculo-referencia" id="referencia-versiculo">
+                            <!-- Referência carregada via JavaScript -->
+                        </cite>
+                        <button class="btn-compartilhar" id="compartilhar-versiculo" aria-label="Compartilhar versículo">
+                            <span class="material-icons">share</span>
+                            <span>Compartilhar</span>
+                        </button>
+                    </div>
+                    <div class="erro-content" id="erro-versiculo" style="display: none;">
+                        <span class="material-icons">error_outline</span>
+                        <p>Não foi possível carregar o versículo. Tente novamente mais tarde.</p>
+                        <button class="btn btn-secondary" onclick="carregarVersiculoDia()">
+                            <span class="material-icons">refresh</span>
+                            <span>Tentar Novamente</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Salmo do Dia -->
+        <section id="salmo-dia" class="salmo-dia">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="material-icons">music_note</span>
+                    Salmo do Dia
+                </h2>
+                <div class="salmo-card" id="card-salmo">
+                    <div class="loading" id="loading-salmo">
+                        <div class="spinner"></div>
+                        <p>Carregando salmo...</p>
+                    </div>
+                    <div class="salmo-content" id="conteudo-salmo" style="display: none;">
+                        <h3 class="salmo-titulo" id="titulo-salmo">
+                            <!-- Título carregado via JavaScript -->
+                        </h3>
+                        <div class="salmo-texto" id="texto-salmo">
+                            <!-- Conteúdo carregado via JavaScript -->
+                        </div>
+                        <a href="#" class="btn btn-outline" id="link-salmo-completo" target="_blank" rel="noopener noreferrer">
+                            <span class="material-icons">open_in_new</span>
+                            <span>Ler Salmo Completo</span>
+                        </a>
+                    </div>
+                    <div class="erro-content" id="erro-salmo" style="display: none;">
+                        <span class="material-icons">error_outline</span>
+                        <p>Não foi possível carregar o salmo. Tente novamente mais tarde.</p>
+                        <button class="btn btn-secondary" onclick="carregarSalmoDia()">
+                            <span class="material-icons">refresh</span>
+                            <span>Tentar Novamente</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recursos -->
+        <section class="recursos">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="material-icons">apps</span>
+                    Nossos Recursos
+                </h2>
+                <div class="recursos-grid">
+                    <div class="recurso-card">
+                        <div class="recurso-icon">
+                            <span class="material-icons">menu_book</span>
+                        </div>
+                        <h3 class="recurso-titulo">Bíblia Online</h3>
+                        <p class="recurso-descricao">
+                            Acesse a Bíblia completa online com diferentes versões e ferramentas de estudo.
+                        </p>
+                        <a href="#" class="btn btn-outline" id="link-biblia-online">
+                            <span class="material-icons">launch</span>
+                            <span>Acessar Bíblia</span>
+                        </a>
+                    </div>
+                    
+                    <div class="recurso-card">
+                        <div class="recurso-icon">
+                            <span class="material-icons">people</span>
+                        </div>
+                        <h3 class="recurso-titulo">Área de Membros</h3>
+                        <p class="recurso-descricao">
+                            Conecte-se com nossa comunidade, compartilhe reflexões e acompanhe seu crescimento.
+                        </p>
+                        <a href="pages/login.html" class="btn btn-outline">
+                            <span class="material-icons">login</span>
+                            <span>Entrar</span>
+                        </a>
+                    </div>
+                    
+                    <div class="recurso-card">
+                        <div class="recurso-icon">
+                            <span class="material-icons">library_music</span>
+                        </div>
+                        <h3 class="recurso-titulo">Hinários</h3>
+                        <p class="recurso-descricao">
+                            Encontre letras e partituras dos seus hinos favoritos para momentos de adoração.
+                        </p>
+                        <a href="pages/sobre.html" class="btn btn-outline">
+                            <span class="material-icons">explore</span>
+                            <span>Conhecer</span>
+                        </a>
+                    </div>
+                    
+                    <div class="recurso-card">
+                        <div class="recurso-icon">
+                            <span class="material-icons">volunteer_activism</span>
+                        </div>
+                        <h3 class="recurso-titulo">Doações</h3>
+                        <p class="recurso-descricao">
+                            Apoie nosso ministério e ajude a expandir o alcance da Palavra de Deus.
+                        </p>
+                        <button class="btn btn-outline" id="simular-doacao">
+                            <span class="material-icons">favorite</span>
+                            <span>Contribuir</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Status de Conexão -->
+        <div id="status-conexao" class="status-conexao" style="display: none;">
+            <div class="container">
+                <span class="material-icons">wifi_off</span>
+                <p id="mensagem-conexao">Você está offline. Algumas funcionalidades podem estar limitadas.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Instituto Pastoral da Vida</h3>
+                    <p class="footer-description">
+                        Dedicados a levar a Palavra de Deus e promover o crescimento espiritual 
+                        através de recursos digitais acessíveis e uma comunidade acolhedora.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Links Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="pages/sobre.html">
+                            <span class="material-icons">info</span>
+                            <span>Sobre Nós</span>
+                        </a></li>
+                        <li><a href="pages/contato.html">
+                            <span class="material-icons">contact_mail</span>
+                            <span>Contato</span>
+                        </a></li>
+                        <li><a href="pages/login.html">
+                            <span class="material-icons">person</span>
+                            <span>Área de Membros</span>
+                        </a></li>
+                        <li><a href="#" id="link-privacidade">
+                            <span class="material-icons">privacy_tip</span>
+                            <span>Política de Privacidade</span>
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Contato</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <span class="material-icons">email</span>
+                            <span>contato@ipvonline.org</span>
+                        </li>
+                        <li>
+                            <span class="material-icons">phone</span>
+                            <span>(11) 99999-9999</span>
+                        </li>
+                        <li>
+                            <span class="material-icons">location_on</span>
+                            <span>São Paulo, SP</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Instituto Pastoral da Vida. Todos os direitos reservados.</p>
+                <p class="footer-tech">
+                    Desenvolvido com carinho em São Paulo. 
+                    <a href="#" onclick="mostrarInfoTecnica()">
+                        <span class="material-icons">code</span>
+                        <span>Informações Técnicas</span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    
+    <!-- VLibras -->
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+</body>
+</html>

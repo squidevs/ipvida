@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cadastre-se gratuitamente no IPVONLINE - Instituto Pastoral da Vida.">
+    <title>Cadastro - IPVONLINE</title>
+    
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✝️</text></svg>">
+    
+    <!-- Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    
+    <link rel="stylesheet" href="../css/globals.css">
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="../css/desktop.css" media="screen and (min-width: 769px)">
+</head>
+<body class="auth-page">
+    <!-- Barra de Acessibilidade -->
+    <div id="barra-acessibilidade" class="barra-acessibilidade">
+        <div class="container">
+            <h2 class="sr-only">Ferramentas de Acessibilidade</h2>
+            <div class="acessibilidade-controles">
+                <button id="aumentar-fonte" class="btn-acessibilidade" title="Aumentar tamanho da fonte">
+                    <span class="material-icons">zoom_in</span>
+                    <span class="btn-text">A+</span>
+                </button>
+                <button id="diminuir-fonte" class="btn-acessibilidade" title="Diminuir tamanho da fonte">
+                    <span class="material-icons">zoom_out</span>
+                    <span class="btn-text">A-</span>
+                </button>
+                <button id="alto-contraste" class="btn-acessibilidade" title="Ativar/Desativar alto contraste">
+                    <span class="material-icons">contrast</span>
+                    <span class="btn-text">Contraste</span>
+                </button>
+                <button id="leitura-texto" class="btn-acessibilidade" title="Ativar/Pausar leitura do texto">
+                    <span class="material-icons">volume_up</span>
+                    <span class="btn-text">Ouvir</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Simples -->
+    <header class="header-minimal">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <span class="material-icons logo-icon">church</span>
+                <span class="logo-text">IPVONLINE</span>
+            </a>
+            
+            <nav class="auth-nav">
+                <a href="../index.html" class="nav-link">
+                    <span class="material-icons">home</span>
+                    <span>Voltar ao Site</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main auth-main" id="conteudo-principal">
+        <div class="auth-container">
+            <div class="auth-card">
+                <!-- Header do Card -->
+                <div class="auth-header">
+                    <h1 class="auth-title">
+                        <span class="material-icons">person_add</span>
+                        Criar Conta Gratuita
+                    </h1>
+                    <p class="auth-subtitle">
+                        Junte-se à nossa comunidade e inicie sua jornada espiritual.
+                    </p>
+                </div>
+
+                <!-- Formulário de Cadastro -->
+                <form id="form-cadastro" class="auth-form" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome" class="form-label">
+                                <span class="material-icons">person</span>
+                                Nome
+                            </label>
+                            <input 
+                                type="text" 
+                                id="nome" 
+                                name="nome" 
+                                class="form-input" 
+                                required 
+                                aria-describedby="nome-erro"
+                                placeholder="Seu primeiro nome"
+                                autocomplete="given-name"
+                            >
+                            <div id="nome-erro" class="form-error" aria-live="polite"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sobrenome" class="form-label">
+                                <span class="material-icons">person_outline</span>
+                                Sobrenome
+                            </label>
+                            <input 
+                                type="text" 
+                                id="sobrenome" 
+                                name="sobrenome" 
+                                class="form-input" 
+                                required 
+                                aria-describedby="sobrenome-erro"
+                                placeholder="Seu sobrenome"
+                                autocomplete="family-name"
+                            >
+                            <div id="sobrenome-erro" class="form-error" aria-live="polite"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">
+                            <span class="material-icons">email</span>
+                            E-mail
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-input" 
+                            required 
+                            aria-describedby="email-erro email-help"
+                            placeholder="Digite seu e-mail"
+                            autocomplete="email"
+                        >
+                        <small id="email-help" class="form-help">
+                            Usaremos este e-mail para comunicações importantes.
+                        </small>
+                        <div id="email-erro" class="form-error" aria-live="polite"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senha" class="form-label">
+                            <span class="material-icons">lock</span>
+                            Senha
+                        </label>
+                        <div class="password-input-group">
+                            <input 
+                                type="password" 
+                                id="senha" 
+                                name="senha" 
+                                class="form-input" 
+                                required 
+                                aria-describedby="senha-erro senha-help"
+                                placeholder="Crie uma senha segura"
+                                autocomplete="new-password"
+                            >
+                            <button 
+                                type="button" 
+                                class="password-toggle" 
+                                id="toggle-senha"
+                                aria-label="Mostrar/ocultar senha"
+                            >
+                                <span class="material-icons">visibility</span>
+                            </button>
+                        </div>
+                        <small id="senha-help" class="form-help">
+                            Mínimo 8 caracteres, incluindo letras e números.
+                        </small>
+                        <div id="senha-erro" class="form-error" aria-live="polite"></div>
+                        
+                        <!-- Indicador de Força da Senha -->
+                        <div class="password-strength" id="password-strength" style="display: none;">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strength-fill"></div>
+                            </div>
+                            <div class="strength-text" id="strength-text">Força da senha</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmar-senha" class="form-label">
+                            <span class="material-icons">lock_outline</span>
+                            Confirmar Senha
+                        </label>
+                        <div class="password-input-group">
+                            <input 
+                                type="password" 
+                                id="confirmar-senha" 
+                                name="confirmar-senha" 
+                                class="form-input" 
+                                required 
+                                aria-describedby="confirmar-senha-erro"
+                                placeholder="Digite a senha novamente"
+                                autocomplete="new-password"
+                            >
+                            <button 
+                                type="button" 
+                                class="password-toggle" 
+                                id="toggle-confirmar-senha"
+                                aria-label="Mostrar/ocultar confirmação de senha"
+                            >
+                                <span class="material-icons">visibility</span>
+                            </button>
+                        </div>
+                        <div id="confirmar-senha-erro" class="form-error" aria-live="polite"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data-nascimento" class="form-label">
+                            <span class="material-icons">cake</span>
+                            Data de Nascimento (opcional)
+                        </label>
+                        <input 
+                            type="date" 
+                            id="data-nascimento" 
+                            name="data-nascimento" 
+                            class="form-input"
+                            autocomplete="bday"
+                        >
+                        <small class="form-help">
+                            Para personalizar sua experiência com conteúdo adequado.
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input 
+                                type="checkbox" 
+                                id="aceita-termos" 
+                                name="aceita-termos" 
+                                required 
+                                aria-describedby="termos-erro"
+                            >
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-text">
+                                Aceito os <a href="#" id="link-termos">termos de uso</a> 
+                                e <a href="#" id="link-privacidade">política de privacidade</a>
+                            </span>
+                        </label>
+                        <div id="termos-erro" class="form-error" aria-live="polite"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input 
+                                type="checkbox" 
+                                id="aceita-newsletter" 
+                                name="aceita-newsletter"
+                            >
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-text">
+                                Quero receber versículos diários e novidades por e-mail
+                            </span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-auth" id="btn-cadastro">
+                        <span class="btn-content">
+                            <span class="material-icons">person_add</span>
+                            <span class="btn-text">Criar Conta</span>
+                        </span>
+                        <div class="btn-loading" style="display: none;">
+                            <div class="spinner-small"></div>
+                            <span>Criando conta...</span>
+                        </div>
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="auth-divider">
+                    <span class="divider-text">ou</span>
+                </div>
+
+                <!-- Cadastro Social (placeholder para futuras implementações) -->
+                <div class="social-login">
+                    <p class="social-text">Cadastre-se com suas redes sociais:</p>
+                    <div class="social-buttons">
+                        <button class="btn-social" id="cadastro-google" disabled title="Em breve">
+                            <span class="material-icons">account_circle</span>
+                            <span>Google</span>
+                        </button>
+                        <button class="btn-social" id="cadastro-facebook" disabled title="Em breve">
+                            <span class="material-icons">facebook</span>
+                            <span>Facebook</span>
+                        </button>
+                    </div>
+                    <small class="social-note">*Funcionalidades em desenvolvimento</small>
+                </div>
+
+                <!-- Link para Login -->
+                <div class="auth-footer">
+                    <p class="auth-switch">
+                        Já tem uma conta? 
+                        <a href="login.html" class="auth-link">
+                            <span class="material-icons">login</span>
+                            <span>Faça login</span>
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Mensagens de Feedback -->
+                <div id="mensagem-sucesso" class="alert alert-success" style="display: none;">
+                    <span class="material-icons">check_circle</span>
+                    <div class="alert-content">
+                        <h3>Conta criada com sucesso!</h3>
+                        <p>Bem-vindo ao IPVONLINE! Redirecionando para sua área pessoal...</p>
+                    </div>
+                </div>
+
+                <div id="mensagem-erro" class="alert alert-error" style="display: none;">
+                    <span class="material-icons">error</span>
+                    <div class="alert-content">
+                        <h3>Erro ao criar conta</h3>
+                        <p id="texto-erro">Verifique os dados e tente novamente.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informações sobre Benefícios -->
+            <div class="auth-info">
+                <div class="info-section">
+                    <h2>
+                        <span class="material-icons">star</span>
+                        Benefícios da sua Conta
+                    </h2>
+                    <ul class="info-list">
+                        <li>
+                            <span class="material-icons">bookmark</span>
+                            <span>Salve seus versículos favoritos</span>
+                        </li>
+                        <li>
+                            <span class="material-icons">notes</span>
+                            <span>Crie notas pessoais de estudo</span>
+                        </li>
+                        <li>
+                            <span class="material-icons">timeline</span>
+                            <span>Acompanhe seu progresso espiritual</span>
+                        </li>
+                        <li>
+                            <span class="material-icons">people</span>
+                            <span>Conecte-se com a comunidade</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2>
+                        <span class="material-icons">security</span>
+                        Privacidade Garantida
+                    </h2>
+                    <p>
+                        Seus dados pessoais são protegidos de acordo com a LGPD. 
+                        Nunca compartilhamos suas informações com terceiros e 
+                        você pode excluir sua conta a qualquer momento.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/app.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/api.js"></script>
+</body>
+</html>

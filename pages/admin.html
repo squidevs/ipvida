@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Painel de Administração - IPVONLINE Instituto Pastoral da Vida">
+    <title>Administração - IPVONLINE</title>
+    
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✝️</text></svg>">
+    
+    <!-- Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    
+    <link rel="stylesheet" href="../css/globals.css">
+    <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="../css/desktop.css" media="screen and (min-width: 769px)">
+</head>
+<body class="admin-page">
+    <!-- Barra de Acessibilidade -->
+    <div id="barra-acessibilidade" class="barra-acessibilidade">
+        <div class="container">
+            <h2 class="sr-only">Ferramentas de Acessibilidade</h2>
+            <div class="acessibilidade-controles">
+                <button id="aumentar-fonte" class="btn-acessibilidade" title="Aumentar tamanho da fonte">
+                    <span class="material-icons">zoom_in</span>
+                    <span class="btn-text">A+</span>
+                </button>
+                <button id="diminuir-fonte" class="btn-acessibilidade" title="Diminuir tamanho da fonte">
+                    <span class="material-icons">zoom_out</span>
+                    <span class="btn-text">A-</span>
+                </button>
+                <button id="alto-contraste" class="btn-acessibilidade" title="Ativar/Desativar alto contraste">
+                    <span class="material-icons">contrast</span>
+                    <span class="btn-text">Contraste</span>
+                </button>
+                <button id="leitura-texto" class="btn-acessibilidade" title="Ativar/Pausar leitura do texto">
+                    <span class="material-icons">volume_up</span>
+                    <span class="btn-text">Ouvir</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header do Admin -->
+    <header class="admin-header">
+        <div class="container">
+            <div class="header-left">
+                <a href="../index.html" class="logo">
+                    <span class="material-icons logo-icon">church</span>
+                    <span class="logo-text">IPVONLINE</span>
+                    <span class="admin-badge">Admin</span>
+                </a>
+            </div>
+            
+            <div class="header-right">
+                <div class="admin-controls">
+                    <button class="btn btn-outline" id="btn-backup">
+                        <span class="material-icons">backup</span>
+                        <span>Backup</span>
+                    </button>
+                    
+                    <div class="user-menu">
+                        <button class="user-button" id="admin-menu-button">
+                            <span class="user-avatar">
+                                <span class="material-icons">admin_panel_settings</span>
+                            </span>
+                            <span class="user-name" id="admin-name">Administrador</span>
+                            <span class="material-icons">expand_more</span>
+                        </button>
+                        
+                        <div class="user-dropdown" id="admin-dropdown" style="display: none;">
+                            <a href="dashboard.html" class="dropdown-item">
+                                <span class="material-icons">dashboard</span>
+                                <span>Meu Dashboard</span>
+                            </a>
+                            <a href="../index.html" class="dropdown-item">
+                                <span class="material-icons">home</span>
+                                <span>Voltar ao Site</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item" id="admin-logout">
+                                <span class="material-icons">logout</span>
+                                <span>Sair</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <!-- Sidebar do Admin -->
+        <aside class="admin-sidebar" id="admin-sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li>
+                        <a href="#overview" class="nav-item active" data-section="overview">
+                            <span class="material-icons">analytics</span>
+                            <span>Visão Geral</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#usuarios" class="nav-item" data-section="usuarios">
+                            <span class="material-icons">people</span>
+                            <span>Usuários</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#mensagens" class="nav-item" data-section="mensagens">
+                            <span class="material-icons">message</span>
+                            <span>Mensagens</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#notas" class="nav-item" data-section="notas">
+                            <span class="material-icons">note</span>
+                            <span>Notas dos Usuários</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#configuracoes" class="nav-item" data-section="configuracoes">
+                            <span class="material-icons">settings</span>
+                            <span>Configurações</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#logs" class="nav-item" data-section="logs">
+                            <span class="material-icons">article</span>
+                            <span>Logs do Sistema</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main" id="conteudo-principal">
+            <!-- Overview -->
+            <section id="section-overview" class="admin-section active">
+                <div class="section-header">
+                    <h1 class="section-title">
+                        <span class="material-icons">analytics</span>
+                        Painel de Administração
+                    </h1>
+                    <p class="section-subtitle">Visão geral do sistema e estatísticas.</p>
+                </div>
+
+                <!-- Estatísticas Gerais -->
+                <div class="admin-stats">
+                    <div class="stat-card stat-primary">
+                        <div class="stat-icon">
+                            <span class="material-icons">people</span>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="total-usuarios">0</h3>
+                            <p class="stat-label">Usuários Cadastrados</p>
+                            <small class="stat-change positive">+5 esta semana</small>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card stat-success">
+                        <div class="stat-icon">
+                            <span class="material-icons">message</span>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="total-mensagens">0</h3>
+                            <p class="stat-label">Mensagens Recebidas</p>
+                            <small class="stat-change neutral">3 não lidas</small>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card stat-warning">
+                        <div class="stat-icon">
+                            <span class="material-icons">note</span>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="total-notas-admin">0</h3>
+                            <p class="stat-label">Notas Criadas</p>
+                            <small class="stat-change positive">+12 hoje</small>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card stat-info">
+                        <div class="stat-icon">
+                            <span class="material-icons">visibility</span>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" id="total-visitas">0</h3>
+                            <p class="stat-label">Visitas Hoje</p>
+                            <small class="stat-change positive">+8%</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos e Atividade Recente -->
+                <div class="admin-widgets">
+                    <div class="widget">
+                        <h3 class="widget-title">
+                            <span class="material-icons">trending_up</span>
+                            Atividade dos Últimos 7 Dias
+                        </h3>
+                        <div class="widget-content">
+                            <div class="activity-chart" id="activity-chart">
+                                <!-- Gráfico simples será implementado via JavaScript -->
+                                <p>Gráfico de atividade em desenvolvimento...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="widget">
+                        <h3 class="widget-title">
+                            <span class="material-icons">schedule</span>
+                            Atividade Recente do Sistema
+                        </h3>
+                        <div class="widget-content">
+                            <div class="activity-feed" id="activity-feed">
+                                <!-- Alimentado via JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Usuários -->
+            <section id="section-usuarios" class="admin-section">
+                <div class="section-header">
+                    <h1 class="section-title">
+                        <span class="material-icons">people</span>
+                        Gerenciar Usuários
+                    </h1>
+                    <div class="section-actions">
+                        <button class="btn btn-outline" id="exportar-usuarios">
+                            <span class="material-icons">download</span>
+                            <span>Exportar</span>
+                        </button>
+                        <button class="btn btn-primary" id="adicionar-usuario">
+                            <span class="material-icons">person_add</span>
+                            <span>Adicionar Usuário</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filtros -->
+                <div class="section-controls">
+                    <div class="search-box">
+                        <span class="material-icons">search</span>
+                        <input type="text" id="buscar-usuarios" placeholder="Buscar usuários...">
+                    </div>
+                    <select id="filtro-usuarios" class="form-select">
+                        <option value="">Todos os usuários</option>
+                        <option value="ativos">Usuários Ativos</option>
+                        <option value="inativos">Usuários Inativos</option>
+                        <option value="admins">Administradores</option>
+                    </select>
+                </div>
+
+                <!-- Tabela de Usuários -->
+                <div class="data-table-container">
+                    <table class="data-table" id="tabela-usuarios">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Data de Cadastro</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Conteúdo carregado via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Mensagens -->
+            <section id="section-mensagens" class="admin-section">
+                <div class="section-header">
+                    <h1 class="section-title">
+                        <span class="material-icons">message</span>
+                        Mensagens de Contato
+                    </h1>
+                    <div class="section-actions">
+                        <button class="btn btn-outline" id="marcar-todas-lidas">
+                            <span class="material-icons">mark_email_read</span>
+                            <span>Marcar Todas como Lidas</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filtros -->
+                <div class="section-controls">
+                    <div class="search-box">
+                        <span class="material-icons">search</span>
+                        <input type="text" id="buscar-mensagens" placeholder="Buscar mensagens...">
+                    </div>
+                    <select id="filtro-mensagens" class="form-select">
+                        <option value="">Todas as mensagens</option>
+                        <option value="nao-lidas">Não lidas</option>
+                        <option value="lidas">Lidas</option>
+                        <option value="respondidas">Respondidas</option>
+                    </select>
+                </div>
+
+                <!-- Lista de Mensagens -->
+                <div class="mensagens-lista" id="mensagens-lista">
+                    <!-- Conteúdo carregado via JavaScript -->
+                </div>
+            </section>
+
+            <!-- Notas dos Usuários -->
+            <section id="section-notas" class="admin-section">
+                <div class="section-header">
+                    <h1 class="section-title">
+                        <span class="material-icons">note</span>
+                        Notas dos Usuários
+                    </h1>
+                    <p class="section-subtitle">Visão geral das notas criadas pelos usuários (somente metadados).</p>
+                </div>
+
+                <!-- Estatísticas de Notas -->
+                <div class="notas-stats">
+                    <div class="stat-item">
+                        <span class="material-icons">note</span>
+                        <div class="stat-details">
+                            <h3 id="notas-total">0</h3>
+                            <p>Total de Notas</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="material-icons">today</span>
+                        <div class="stat-details">
+                            <h3 id="notas-hoje">0</h3>
+                            <p>Criadas Hoje</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="material-icons">trending_up</span>
+                        <div class="stat-details">
+                            <h3 id="notas-semana">0</h3>
+                            <p>Esta Semana</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráfico de Notas por Categoria -->
+                <div class="widget">
+                    <h3 class="widget-title">Distribuição por Categoria</h3>
+                    <div class="categories-chart" id="categories-chart">
+                        <!-- Implementar via JavaScript -->
+                        <p>Gráfico em desenvolvimento...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Configurações -->
+            <section id="section-configuracoes" class="admin-section">
+                <div class="section-header">
+                    <h1 class="section-title">
+                        <span class="material-icons">settings</span>
+                        Configurações do Sistema
+                    </h1>
+                </div>
+
+                <div class="config-grid">
+                    <div class="config-card">
+                        <h3>
+                            <span class="material-icons">api</span>
+                            APIs Externas
+                        </h3>
+                        <div class="config-item">
+                            <label>Status da API da Bíblia:</label>
+                            <span class="status-badge status-active" id="status-api-biblia">Ativa</span>
+                        </div>
+                        <div class="config-item">
+                            <label>Status da API de Pagamentos:</label>
+                            <span class="status-badge status-inactive" id="status-api-pagamento">Sandbox</span>
+                        </div>
+                    </div>
+
+                    <div class="config-card">
+                        <h3>
+                            <span class="material-icons">backup</span>
+                            Backup e Manutenção
+                        </h3>
+                        <div class="config-item">
+                            <label>Último backup:</label>
+                            <span id="ultimo-backup">Nunca</span>
+                        </div>
+                        <button class="btn btn-outline" id="fazer-backup">
+                            <span class="material-icons">cloud_upload</span>
+                            <span>Fazer Backup Agora</span>
+                        </button>
+                    </div>
+
+                    <div class="config-card">
+                        <h3>
+                            <span class="material-icons">security</span>
+                            Segurança
+                        </h3>
+                        <div class="config-item">
+                            <label>Tentativas de login falharam hoje:</label>
+                            <span id="tentativas-login">0</span>
+                        </div>
+                        <div class="config-item">
+                            <label>IPs bloqueados:</label>
+                            <span id="ips-bloqueados">0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Logs -->
+            <section id="section-logs" class="admin-section">
+                <div class="section-header">
+                    <h1 class="section-title">
+                        <span class="material-icons">article</span>
+                        Logs do Sistema
+                    </h1>
+                </div>
+
+                <!-- Filtros de Logs -->
+                <div class="section-controls">
+                    <select id="filtro-logs" class="form-select">
+                        <option value="">Todos os logs</option>
+                        <option value="error">Erros</option>
+                        <option value="warning">Avisos</option>
+                        <option value="info">Informações</option>
+                        <option value="auth">Autenticação</option>
+                    </select>
+                    <input type="date" id="data-logs" class="form-input">
+                </div>
+
+                <!-- Lista de Logs -->
+                <div class="logs-container" id="logs-container">
+                    <!-- Conteúdo carregado via JavaScript -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal de Detalhes do Usuário -->
+    <div id="modal-usuario" class="modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-usuario-title">
+                    <span class="material-icons">person</span>
+                    Detalhes do Usuário
+                </h2>
+                <button class="modal-close" id="fechar-modal-usuario">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            
+            <div class="modal-body" id="modal-usuario-content">
+                <!-- Conteúdo carregado via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/app.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/api.js"></script>
+    
+    <script>
+        // Verificar se é administrador ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            verificarAdmin();
+        });
+    </script>
+</body>
+</html>
