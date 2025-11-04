@@ -1,353 +1,711 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="IPVONLINE - Plataforma digital do Instituto Pastoral da Vida, oferecendo conteúdo bíblico diário, recursos de acessibilidade e área de membros.">
-    <meta name="keywords" content="bíblia, instituto pastoral, vida, versículo diário, salmo, acessibilidade">
-    <meta name="author" content="Instituto Pastoral da Vida">
-    <meta name="theme-color" content="#2563eb">
-    
-    <!-- PWA Meta Tags -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="IPVONLINE">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✝️</text></svg>">
-    
-    <title>IPVONLINE - Instituto Pastoral da Vida</title>
-    
-    <!-- Material Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/globals.css">
-    <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width: 768px)">
-    <link rel="stylesheet" href="css/desktop.css" media="screen and (min-width: 769px)">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Igreja Presbiteriana Vida - Uma comunidade de fé, esperança e amor em Campinas-SP">
+  <meta name="keywords" content="igreja, presbiteriana, campinas, culto, fé, cristo">
+  <meta name="theme-color" content="#1A4731">
+  
+  <title>Igreja Presbiteriana Vida | Campinas-SP</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/globais.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/animacoes.css">
+  <link rel="stylesheet" href="css/mobile.css">
+  <link rel="stylesheet" href="css/desktop.css">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <!-- VLibras -->
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
-<body>
-    <!-- Barra de Acessibilidade -->
-    <div id="barra-acessibilidade" class="barra-acessibilidade">
-        <div class="container">
-            <h2 class="sr-only">Ferramentas de Acessibilidade</h2>
-            <div class="acessibilidade-controles">
-                <button id="aumentar-fonte" class="btn-acessibilidade" title="Aumentar tamanho da fonte" aria-label="Aumentar tamanho da fonte">
-                    <span class="material-icons">zoom_in</span>
-                    <span class="btn-text">A+</span>
-                </button>
-                <button id="diminuir-fonte" class="btn-acessibilidade" title="Diminuir tamanho da fonte" aria-label="Diminuir tamanho da fonte">
-                    <span class="material-icons">zoom_out</span>
-                    <span class="btn-text">A-</span>
-                </button>
-                <button id="alto-contraste" class="btn-acessibilidade" title="Ativar/Desativar alto contraste" aria-label="Alternar alto contraste">
-                    <span class="material-icons">contrast</span>
-                    <span class="btn-text">Contraste</span>
-                </button>
-                <button id="leitura-texto" class="btn-acessibilidade" title="Ativar/Pausar leitura do texto" aria-label="Ativar ou pausar leitura do texto">
-                    <span class="material-icons">volume_up</span>
-                    <span class="btn-text">Ouvir</span>
-                </button>
-                <div id="vlibras">
-                    <div vw class="enabled">
-                        <div vw-access-button class="active"></div>
-                        <div vw-plugin-wrapper>
-                            <div class="vw-plugin-top-wrapper"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Header -->
-    <header class="header">
-        <nav class="navbar container">
-            <div class="navbar-brand">
-                <a href="index.html" class="logo">
-                    <span class="material-icons logo-icon">church</span>
-                    <span class="logo-text">IPVONLINE</span>
-                </a>
-            </div>
-            
-            <button class="navbar-toggle" aria-label="Abrir menu de navegação" aria-expanded="false">
-                <span class="material-icons">menu</span>
-            </button>
-            
-            <div class="navbar-menu">
-                <ul class="navbar-nav">
-                    <li><a href="index.html" class="nav-link active">
-                        <span class="material-icons">home</span>
-                        <span>Início</span>
-                    </a></li>
-                    <li><a href="pages/sobre.html" class="nav-link">
-                        <span class="material-icons">info</span>
-                        <span>Sobre</span>
-                    </a></li>
-                    <li><a href="pages/contato.html" class="nav-link">
-                        <span class="material-icons">contact_mail</span>
-                        <span>Contato</span>
-                    </a></li>
-                    <li><a href="pages/login.html" class="nav-link">
-                        <span class="material-icons">login</span>
-                        <span>Entrar</span>
-                    </a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main" id="conteudo-principal">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">Bem-vindo ao Instituto Pastoral da Vida</h1>
-                    <p class="hero-description">
-                        Conecte-se diariamente com a Palavra de Deus através de nossos recursos bíblicos,
-                        versículos inspiradores e uma comunidade dedicada ao crescimento espiritual.
-                    </p>
-                    <div class="hero-actions">
-                        <a href="pages/register.html" class="btn btn-primary">
-                            <span class="material-icons">person_add</span>
-                            <span>Cadastre-se Grátis</span>
-                        </a>
-                        <a href="#versiculo-dia" class="btn btn-secondary">
-                            <span class="material-icons">auto_stories</span>
-                            <span>Ver Versículo do Dia</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Versículo do Dia -->
-        <section id="versiculo-dia" class="versiculo-dia">
-            <div class="container">
-                <h2 class="section-title">
-                    <span class="material-icons">today</span>
-                    Versículo do Dia
-                </h2>
-                <div class="versiculo-card" id="card-versiculo">
-                    <div class="loading" id="loading-versiculo">
-                        <div class="spinner"></div>
-                        <p>Carregando versículo...</p>
-                    </div>
-                    <div class="versiculo-content" id="conteudo-versiculo" style="display: none;">
-                        <blockquote class="versiculo-texto" id="texto-versiculo">
-                            <!-- Conteúdo carregado via JavaScript -->
-                        </blockquote>
-                        <cite class="versiculo-referencia" id="referencia-versiculo">
-                            <!-- Referência carregada via JavaScript -->
-                        </cite>
-                        <button class="btn-compartilhar" id="compartilhar-versiculo" aria-label="Compartilhar versículo">
-                            <span class="material-icons">share</span>
-                            <span>Compartilhar</span>
-                        </button>
-                    </div>
-                    <div class="erro-content" id="erro-versiculo" style="display: none;">
-                        <span class="material-icons">error_outline</span>
-                        <p>Não foi possível carregar o versículo. Tente novamente mais tarde.</p>
-                        <button class="btn btn-secondary" onclick="carregarVersiculoDia()">
-                            <span class="material-icons">refresh</span>
-                            <span>Tentar Novamente</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Salmo do Dia -->
-        <section id="salmo-dia" class="salmo-dia">
-            <div class="container">
-                <h2 class="section-title">
-                    <span class="material-icons">music_note</span>
-                    Salmo do Dia
-                </h2>
-                <div class="salmo-card" id="card-salmo">
-                    <div class="loading" id="loading-salmo">
-                        <div class="spinner"></div>
-                        <p>Carregando salmo...</p>
-                    </div>
-                    <div class="salmo-content" id="conteudo-salmo" style="display: none;">
-                        <h3 class="salmo-titulo" id="titulo-salmo">
-                            <!-- Título carregado via JavaScript -->
-                        </h3>
-                        <div class="salmo-texto" id="texto-salmo">
-                            <!-- Conteúdo carregado via JavaScript -->
-                        </div>
-                        <a href="#" class="btn btn-outline" id="link-salmo-completo" target="_blank" rel="noopener noreferrer">
-                            <span class="material-icons">open_in_new</span>
-                            <span>Ler Salmo Completo</span>
-                        </a>
-                    </div>
-                    <div class="erro-content" id="erro-salmo" style="display: none;">
-                        <span class="material-icons">error_outline</span>
-                        <p>Não foi possível carregar o salmo. Tente novamente mais tarde.</p>
-                        <button class="btn btn-secondary" onclick="carregarSalmoDia()">
-                            <span class="material-icons">refresh</span>
-                            <span>Tentar Novamente</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Recursos -->
-        <section class="recursos">
-            <div class="container">
-                <h2 class="section-title">
-                    <span class="material-icons">apps</span>
-                    Nossos Recursos
-                </h2>
-                <div class="recursos-grid">
-                    <div class="recurso-card">
-                        <div class="recurso-icon">
-                            <span class="material-icons">menu_book</span>
-                        </div>
-                        <h3 class="recurso-titulo">Bíblia Online</h3>
-                        <p class="recurso-descricao">
-                            Acesse a Bíblia completa online com diferentes versões e ferramentas de estudo.
-                        </p>
-                        <a href="#" class="btn btn-outline" id="link-biblia-online">
-                            <span class="material-icons">launch</span>
-                            <span>Acessar Bíblia</span>
-                        </a>
-                    </div>
-                    
-                    <div class="recurso-card">
-                        <div class="recurso-icon">
-                            <span class="material-icons">people</span>
-                        </div>
-                        <h3 class="recurso-titulo">Área de Membros</h3>
-                        <p class="recurso-descricao">
-                            Conecte-se com nossa comunidade, compartilhe reflexões e acompanhe seu crescimento.
-                        </p>
-                        <a href="pages/login.html" class="btn btn-outline">
-                            <span class="material-icons">login</span>
-                            <span>Entrar</span>
-                        </a>
-                    </div>
-                    
-                    <div class="recurso-card">
-                        <div class="recurso-icon">
-                            <span class="material-icons">library_music</span>
-                        </div>
-                        <h3 class="recurso-titulo">Hinários</h3>
-                        <p class="recurso-descricao">
-                            Encontre letras e partituras dos seus hinos favoritos para momentos de adoração.
-                        </p>
-                        <a href="pages/sobre.html" class="btn btn-outline">
-                            <span class="material-icons">explore</span>
-                            <span>Conhecer</span>
-                        </a>
-                    </div>
-                    
-                    <div class="recurso-card">
-                        <div class="recurso-icon">
-                            <span class="material-icons">volunteer_activism</span>
-                        </div>
-                        <h3 class="recurso-titulo">Doações</h3>
-                        <p class="recurso-descricao">
-                            Apoie nosso ministério e ajude a expandir o alcance da Palavra de Deus.
-                        </p>
-                        <button class="btn btn-outline" id="simular-doacao">
-                            <span class="material-icons">favorite</span>
-                            <span>Contribuir</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Status de Conexão -->
-        <div id="status-conexao" class="status-conexao" style="display: none;">
-            <div class="container">
-                <span class="material-icons">wifi_off</span>
-                <p id="mensagem-conexao">Você está offline. Algumas funcionalidades podem estar limitadas.</p>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3 class="footer-title">Instituto Pastoral da Vida</h3>
-                    <p class="footer-description">
-                        Dedicados a levar a Palavra de Deus e promover o crescimento espiritual 
-                        através de recursos digitais acessíveis e uma comunidade acolhedora.
-                    </p>
-                </div>
-                
-                <div class="footer-section">
-                    <h4 class="footer-subtitle">Links Rápidos</h4>
-                    <ul class="footer-links">
-                        <li><a href="pages/sobre.html">
-                            <span class="material-icons">info</span>
-                            <span>Sobre Nós</span>
-                        </a></li>
-                        <li><a href="pages/contato.html">
-                            <span class="material-icons">contact_mail</span>
-                            <span>Contato</span>
-                        </a></li>
-                        <li><a href="pages/login.html">
-                            <span class="material-icons">person</span>
-                            <span>Área de Membros</span>
-                        </a></li>
-                        <li><a href="#" id="link-privacidade">
-                            <span class="material-icons">privacy_tip</span>
-                            <span>Política de Privacidade</span>
-                        </a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4 class="footer-subtitle">Contato</h4>
-                    <ul class="footer-contact">
-                        <li>
-                            <span class="material-icons">email</span>
-                            <span>contato@ipvonline.org</span>
-                        </li>
-                        <li>
-                            <span class="material-icons">phone</span>
-                            <span>(11) 99999-9999</span>
-                        </li>
-                        <li>
-                            <span class="material-icons">location_on</span>
-                            <span>São Paulo, SP</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 Instituto Pastoral da Vida. Todos os direitos reservados.</p>
-                <p class="footer-tech">
-                    Desenvolvido com carinho em São Paulo. 
-                    <a href="#" onclick="mostrarInfoTecnica()">
-                        <span class="material-icons">code</span>
-                        <span>Informações Técnicas</span>
-                    </a>
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="js/app.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/api.js"></script>
+<body x-data="aplicacao()">
+  
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">
+        <img src="assets/images/logo-preto.png" alt="Logo IPV">
+        <span class="navbar-logo-texto">IPV Online</span>
+      </div><!-- navbar-logo !-->
+      
+      <ul class="navbar-menu" :class="{ 'aberto': menuAberto }">
+        <li class="navbar-item"><a href="#inicio" @click="fecharMenu">Início</a></li>
+        <li class="navbar-item"><a href="#sobre">Sobre</a></li>
+        <li class="navbar-item"><a href="#devocionais">Devocionais</a></li>
+        <li class="navbar-item"><a href="#videos">Cultos</a></li>
+        <li class="navbar-item"><a href="#eventos">Eventos</a></li>
+        <li class="navbar-item"><a href="#cremos">O Que Cremos</a></li>
+        <li class="navbar-item"><a href="#contribuicoes">Contribuir</a></li>
+        <li class="navbar-item"><a href="#localizacao">Localização</a></li>
+        <li class="navbar-item"><a href="#contato">Contato</a></li>
+      </ul><!-- navbar-menu !-->
+      
+      <button class="navbar-toggle" @click="menuAberto = !menuAberto" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button><!-- navbar-toggle !-->
+    </div><!-- navbar-container !-->
+  </nav><!-- navbar !-->
+  
+  <!-- ==================== HERO SECTION ==================== -->
+  <section id="inicio" class="hero">
+    <img src="assets/images/foto-igreja.png" alt="Igreja Presbiteriana Vida" class="hero-background">
+    <div class="hero-overlay"></div>
     
-    <!-- VLibras -->
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
+    <div class="hero-conteudo fade-in">
+      <h1 class="hero-titulo">Igreja Presbiteriana Vida</h1>
+      <p class="hero-subtitulo">
+        Uma comunidade de fé, esperança e amor<br>
+        Venha nos visitar e conhecer mais sobre Jesus Cristo
+      </p>
+      
+      <div class="hero-botoes">
+        <a href="#sobre" class="botao botao-primario botao-grande">
+          Conheça Nossa Igreja
+        </a>
+        <a href="#localizacao" class="botao botao-secundario botao-grande">
+          Como Chegar
+        </a>
+      </div><!-- hero-botoes !-->
+    </div><!-- hero-conteudo !-->
+  </section><!-- hero !-->
+  
+  <!-- ==================== SOBRE ==================== -->
+  <section id="sobre" class="secao">
+    <div class="container">
+      <h2 class="secao-titulo scroll-reveal">Bem-vindo à IPV</h2>
+      <p class="secao-subtitulo scroll-reveal">
+        Somos uma igreja reformada comprometida com a Palavra de Deus e a transformação de vidas
+      </p>
+      
+      <div class="grid grid-3">
+        <div class="card scroll-reveal delay-1">
+          <div class="card-corpo">
+            <h3 class="card-titulo">Nossa Missão</h3>
+            <p class="card-texto">
+              Proclamar o Evangelho de Jesus Cristo, fazer discípulos e glorificar a Deus 
+              através do ensino fiel das Escrituras.
+            </p>
+          </div><!-- card-corpo !-->
+        </div><!-- card !-->
+        
+        <div class="card scroll-reveal delay-2">
+          <div class="card-corpo">
+            <h3 class="card-titulo">Nossa Visão</h3>
+            <p class="card-texto">
+              Ser uma comunidade acolhedora onde pessoas encontram vida em Cristo e 
+              crescem em santidade e amor ao próximo.
+            </p>
+          </div><!-- card-corpo !-->
+        </div><!-- card !-->
+        
+        <div class="card scroll-reveal delay-3">
+          <div class="card-corpo">
+            <h3 class="card-titulo">Nossos Valores</h3>
+            <p class="card-texto">
+              Fidelidade à Escritura, adoração reverente, comunhão genuína, evangelização 
+              e serviço ao próximo com amor.
+            </p>
+          </div><!-- card-corpo !-->
+        </div><!-- card !-->
+      </div><!-- grid !-->
+    </div><!-- container !-->
+  </section><!-- sobre !-->
+  
+  <!-- ==================== DEVOCIONAIS COM CARROSSEL ==================== -->
+  <section id="devocionais" class="secao" style="background: var(--cinza-muito-claro);">
+    <div class="container">
+      <h2 class="secao-titulo">Devocional Diário</h2>
+      <p class="secao-subtitulo">
+        Alimente sua fé com a Palavra de Deus todos os dias
+      </p>
+      
+      <div class="carrossel-devocionais" x-data="carrosselDevocionais()">
+        <div class="carrossel-slides">
+          <!-- Slide 1: Versículo do Dia -->
+          <div class="carrossel-slide" :class="{ 'ativo': slideAtual === 0 }">
+            <span class="carrossel-tipo"><span class="material-icons" style="vertical-align: middle; margin-right: 4px;">menu_book</span>Versículo do Dia</span>
+            <blockquote class="carrossel-versiculo" x-text="versiculoDia.texto"></blockquote>
+            <cite class="carrossel-referencia" x-text="versiculoDia.referencia"></cite>
+          </div><!-- carrossel-slide !-->
+          
+          <!-- Slide 2: Salmo do Dia -->
+          <div class="carrossel-slide" :class="{ 'ativo': slideAtual === 1 }">
+            <span class="carrossel-tipo"><span class="material-icons" style="vertical-align: middle; margin-right: 4px;">music_note</span>Salmo do Dia</span>
+            <blockquote class="carrossel-versiculo" x-text="salmoDia.texto"></blockquote>
+            <cite class="carrossel-referencia" x-text="salmoDia.referencia"></cite>
+          </div><!-- carrossel-slide !-->
+          
+          <!-- Slide 3: Provérbio do Dia -->
+          <div class="carrossel-slide" :class="{ 'ativo': slideAtual === 2 }">
+            <span class="carrossel-tipo"><span class="material-icons" style="vertical-align: middle; margin-right: 4px;">lightbulb</span>Provérbio do Dia</span>
+            <blockquote class="carrossel-versiculo" x-text="proberbioDia.texto"></blockquote>
+            <cite class="carrossel-referencia" x-text="proberbioDia.referencia"></cite>
+          </div><!-- carrossel-slide !-->
+        </div><!-- carrossel-slides !-->
+        
+        <div class="carrossel-controles">
+          <button class="carrossel-botao" @click="anterior()" aria-label="Anterior">
+            &#8249;
+          </button>
+          
+          <div class="carrossel-indicadores">
+            <template x-for="(slide, index) in 3" :key="index">
+              <button 
+                class="carrossel-indicador" 
+                :class="{ 'ativo': slideAtual === index }"
+                @click="irPara(index)"
+                :aria-label="'Ir para slide ' + (index + 1)">
+              </button>
+            </template>
+          </div><!-- carrossel-indicadores !-->
+          
+          <button class="carrossel-botao" @click="proximo()" aria-label="Próximo">
+            &#8250;
+          </button>
+        </div><!-- carrossel-controles !-->
+      </div><!-- carrossel-devocionais !-->
+      
+      <div class="text-center mt-4">
+        <a href="https://www.bibliaonline.com.br" target="_blank" rel="noopener noreferrer" 
+           class="botao botao-outline">
+          <span class="material-icons" style="vertical-align: middle;">menu_book</span> Ler a Bíblia Completa Online
+        </a>
+      </div>
+    </div><!-- container !-->
+  </section><!-- devocionais !-->
+  
+  <!-- ==================== VÍDEOS / CULTOS ==================== -->
+  <section id="videos" class="secao">
+    <div class="container">
+      <h2 class="secao-titulo">Nossos Cultos</h2>
+      <p class="secao-subtitulo">
+        Assista aos cultos e estudos bíblicos em nosso canal do YouTube
+      </p>
+      
+      <div class="grid grid-3" x-data="videosYoutube()">
+        <template x-for="video in videos" :key="video.id">
+          <div class="card hover-lift">
+            <img :src="video.thumbnail" :alt="video.titulo" class="card-imagem">
+            <div class="card-corpo">
+              <h4 class="card-titulo" x-text="video.titulo"></h4>
+              <p class="card-texto" x-text="video.descricao"></p>
+              <a :href="video.url" target="_blank" class="botao botao-primario" style="margin-top: auto;">
+                <span class="material-icons" style="vertical-align: middle;">play_arrow</span> Assistir
+              </a>
+            </div><!-- card-corpo !-->
+          </div><!-- card !-->
+        </template>
+      </div><!-- grid !-->
+      
+      <div class="text-center mt-4">
+        <a href="https://youtube.com/@ipbvida" target="_blank" class="botao botao-secundario botao-grande">
+          Ver Todos os Vídeos
+        </a>
+      </div>
+    </div><!-- container !-->
+  </section><!-- videos !-->
+  
+  <!-- ==================== EVENTOS ==================== -->
+  <section id="eventos" class="secao" style="background: var(--cinza-muito-claro);">
+    <div class="container">
+      <h2 class="secao-titulo">Próximos Eventos</h2>
+      <p class="secao-subtitulo">
+        Participe das atividades e eventos da nossa igreja
+      </p>
+      
+      <div class="eventos-container" x-data="eventosIgreja()">
+        <template x-for="evento in eventos" :key="evento.id">
+          <div class="evento-card">
+            <img :src="evento.imagem" :alt="evento.titulo" class="evento-imagem">
+            <div class="evento-conteudo">
+              <span class="evento-data" x-text="formatarData(evento.data)"></span>
+              <h3 class="evento-titulo" x-text="evento.titulo"></h3>
+              <p class="evento-descricao" x-text="evento.descricao"></p>
+            </div><!-- evento-conteudo !-->
+          </div><!-- evento-card !-->
+        </template>
+      </div><!-- eventos-container !-->
+    </div><!-- container !-->
+  </section><!-- eventos !-->
+  
+  <!-- ==================== 5 PONTOS DO CALVINISMO ==================== -->
+  <section id="calvinismo" class="secao">
+    <div class="container">
+      <h2 class="secao-titulo">Os 5 Pontos do Calvinismo</h2>
+      <p class="secao-subtitulo">
+        Conheça as doutrinas da graça (TULIP) que fundamentam nossa teologia reformada
+      </p>
+      
+      <div class="grid grid-2" x-data="{ pontoExpandido: null }">
+        <!-- Depravação Total -->
+        <div class="card">
+          <div class="card-corpo">
+            <h3 class="card-titulo" style="color: var(--verde-medio); display: flex; align-items: center; gap: 8px;">
+              <span class="material-icons">eco</span> Depravação Total
+            </h3>
+            <p class="card-texto">
+              <strong>Total Depravity:</strong> Todos os seres humanos nascem com uma natureza pecaminosa 
+              que afeta cada aspecto do seu ser. O pecado corrompeu totalmente nossa vontade, 
+              tornando-nos incapazes de buscar a Deus por nós mesmos.
+            </p>
+            <p class="card-texto">
+              <em>"Não há justo, nem um sequer" (Romanos 3:10)</em>
+            </p>
+          </div><!-- card-corpo !-->
+        </div><!-- card !-->
+        
+        <!-- Eleição Incondicional -->
+        <div class="card">
+          <div class="card-corpo">
+            <h3 class="card-titulo" style="color: var(--verde-medio); display: flex; align-items: center; gap: 8px;">
+              <span class="material-icons">stars</span> Eleição Incondicional
+            </h3>
+            <p class="card-texto">
+              <strong>Unconditional Election:</strong> Deus escolheu desde a eternidade aqueles 
+              que seriam salvos, não baseado em méritos humanos, mas segundo o beneplácito de 
+              Sua vontade e para a glória de Sua graça.
+            </p>
+            <p class="card-texto">
+              <em>"Nos elegeu nele antes da fundação do mundo" (Efésios 1:4)</em>
+            </p>
+          </div><!-- card-corpo !-->
+        </div><!-- card !-->
+        
+        <!-- Expiação Limitada -->
+        <div class="card">
+          <div class="card-corpo">
+            <h3 class="card-titulo" style="color: var(--verde-medio); display: flex; align-items: center; gap: 8px;">
+              <span class="material-icons">favorite</span> Expiação Limitada
+            </h3>
+            <p class="card-texto">
+              <strong>Limited Atonement:</strong> Cristo morreu para garantir a salvação dos 
+              eleitos. Sua morte na cruz foi suficiente para todos, mas eficaz apenas para 
+              aqueles que Deus escolheu salvar.
+            </p>
+            <p class="card-texto">
+              <em>"O bom pastor dá a vida pelas suas ovelhas" (João 10:11)</em>
+            </p>
+          </div><!-- card-corpo !-->
+        </div><!-- card !-->
+        
+        <!-- Graça Irresistível -->
+        <div class="card">
+          <div class="card-corpo">
+            <h3 class="card-titulo" style="color: var(--verde-medio); display: flex; align-items: center; gap: 8px;">
+              <span class="material-icons">bolt</span> Graça Irresistível
+            </h3>
+            <p class="card-texto">
+              <strong>Irresistible Grace:</strong> O Espírito Santo atrai eficazmente os eleitos 
+              para Cristo, vencendo toda resistência e tornando-os dispostos a crer. A graça de 
+              Deus não pode ser frustrada.
+            </p>
+            <p class="card-texto">
+              <em>"Todo aquele que o Pai me dá, esse virá a mim" (João 6:37)</em>
+            </p>
+          </div><!-- card-corpo !-->
+        </div><!-- card !-->
+        
+        <!-- Perseverança dos Santos -->
+        <div class="card">
+          <div class="card-corpo">
+            <h3 class="card-titulo" style="color: var(--verde-medio); display: flex; align-items: center; gap: 8px;">
+              <span class="material-icons">shield</span> Perseverança dos Santos
+            </h3>
+            <p class="card-texto">
+              <strong>Perseverance of the Saints:</strong> Aqueles que foram genuinamente salvos 
+              por Deus perseverarão na fé até o fim. Deus preservará Seus eleitos, garantindo 
+              que não perderão a salvação.
+            </p>
+            <p class="card-texto">
+              <em>"Aquele que começou boa obra em vós há de completá-la" (Filipenses 1:6)</em>
+            </p>
+          </div><!-- card-corpo !-->
+        </div><!-- card !-->
+      </div><!-- grid !-->
+    </div><!-- container !-->
+  </section><!-- calvinismo !-->
+  
+  <!-- ==================== O QUE CREMOS ==================== -->
+  <section id="cremos" class="secao" style="background: var(--cinza-muito-claro);">
+    <div class="container">
+      <h2 class="secao-titulo">O Que Cremos</h2>
+      <p class="secao-subtitulo">
+        Nossa fé está firmada nas doutrinas bíblicas e reformadas
+      </p>
+      
+      <div style="max-width: 900px; margin: 0 auto;" x-data="{ aberto: null }">
+        <!-- Escrituras -->
+        <div class="card mb-2">
+          <div class="card-corpo">
+            <h3 class="card-titulo" @click="aberto = aberto === 1 ? null : 1" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+              <span style="display: flex; align-items: center; gap: 8px;"><span class="material-icons">menu_book</span>Escrituras Sagradas</span>
+              <span x-text="aberto === 1 ? '−' : '+'"></span>
+            </h3>
+            <div x-show="aberto === 1" x-collapse>
+              <p class="card-texto">
+                Cremos que a Bíblia é a Palavra de Deus inspirada, inerrante e infalível. 
+                É a única regra de fé e prática, suficiente para ensinar o caminho da salvação 
+                e orientar o cristão em toda boa obra.
+              </p>
+              <p class="card-texto">
+                <em>"Toda Escritura é inspirada por Deus e útil para o ensino, para a repreensão, 
+                para a correção, para a educação na justiça" (2 Timóteo 3:16)</em>
+              </p>
+            </div>
+          </div><!-- card-corpo !-->
+        </div><!-- card !-->
+        
+        <!-- Trindade -->
+        <div class="card mb-2">
+          <div class="card-corpo">
+            <h3 class="card-titulo" @click="aberto = aberto === 2 ? null : 2" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+              <span style="display: flex; align-items: center; gap: 8px;"><span class="material-icons">church</span>A Santíssima Trindade</span>
+              <span x-text="aberto === 2 ? '−' : '+'"></span>
+            </h3>
+            <div x-show="aberto === 2" x-collapse>
+              <p class="card-texto">
+                Cremos em um só Deus eternamente subsistente em três pessoas: Pai, Filho e Espírito Santo. 
+                São iguais em poder e glória, mas distintas em função na obra de criação, redenção e 
+                santificação.
+              </p>
+              <p class="card-texto">
+                <em>"Batizando-os em nome do Pai, e do Filho, e do Espírito Santo" (Mateus 28:19)</em>
+              </p>
+            </div>
+          </div><!-- card-corpo !-->
+        </div><!-- card !-->
+        
+        <!-- Salvação -->
+        <div class="card mb-2">
+          <div class="card-corpo">
+            <h3 class="card-titulo" @click="aberto = aberto === 3 ? null : 3" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+              <span style="display: flex; align-items: center; gap: 8px;"><span class="material-icons">volunteer_activism</span>Salvação pela Graça</span>
+              <span x-text="aberto === 3 ? '−' : '+'"></span>
+            </h3>
+            <div x-show="aberto === 3" x-collapse>
+              <p class="card-texto">
+                Cremos que a salvação é pela graça somente, através da fé somente, em Cristo somente. 
+                Ninguém pode salvar-se por obras ou méritos próprios. É um dom gratuito de Deus para 
+                aqueles que se arrependem e creem no Senhor Jesus.
+              </p>
+              <p class="card-texto">
+                <em>"Porque pela graça sois salvos, mediante a fé; e isto não vem de vós; é dom de Deus" 
+                (Efésios 2:8)</em>
+              </p>
+            </div>
+          </div><!-- card-corpo !-->
+        </div><!-- card !-->
+        
+        <!-- Igreja -->
+        <div class="card mb-2">
+          <div class="card-corpo">
+            <h3 class="card-titulo" @click="aberto = aberto === 4 ? null : 4" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+              <span style="display: flex; align-items: center; gap: 8px;"><span class="material-icons">account_balance</span>A Igreja de Cristo</span>
+              <span x-text="aberto === 4 ? '−' : '+'"></span>
+            </h3>
+            <div x-show="aberto === 4" x-collapse>
+              <p class="card-texto">
+                Cremos que a Igreja é o corpo de Cristo, composta por todos os verdadeiros crentes de 
+                todas as épocas. A igreja local é uma comunidade de fé onde os santos se reúnem para 
+                adoração, edificação mútua e missão.
+              </p>
+              <p class="card-texto">
+                <em>"Cristo amou a igreja e a si mesmo se entregou por ela" (Efésios 5:25)</em>
+              </p>
+            </div>
+          </div><!-- card-corpo !-->
+        </div><!-- card !-->
+        
+        <!-- Volta de Cristo -->
+        <div class="card mb-2">
+          <div class="card-corpo">
+            <h3 class="card-titulo" @click="aberto = aberto === 5 ? null : 5" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+              <span style="display: flex; align-items: center; gap: 8px;"><span class="material-icons">brightness_5</span>A Volta de Cristo</span>
+              <span x-text="aberto === 5 ? '−' : '+'"></span>
+            </h3>
+            <div x-show="aberto === 5" x-collapse>
+              <p class="card-texto">
+                Cremos na volta pessoal, visível e gloriosa de Jesus Cristo. Ele julgará vivos e mortos, 
+                estabelecerá Seu reino eterno, e haverá novos céus e nova terra onde habita a justiça.
+              </p>
+              <p class="card-texto">
+                <em>"Este Jesus que dentre vós foi assunto ao céu, assim virá do modo como o vistes subir" 
+                (Atos 1:11)</em>
+              </p>
+            </div>
+          </div><!-- card-corpo !-->
+        </div><!-- card !-->
+      </div>
+      
+      <div class="text-center mt-5">
+        <a href="paginas/confissao-fe.html" class="botao botao-primario botao-grande">
+          <span class="material-icons" style="vertical-align: middle;">description</span> Ler Confissão de Fé de Westminster Completa
+        </a>
+      </div>
+    </div><!-- container !-->
+  </section><!-- cremos !-->
+  
+  <!-- ==================== CONTRIBUIÇÕES ==================== -->
+  <section id="contribuicoes" class="secao">
+    <div class="container">
+      <h2 class="secao-titulo">Contribuições</h2>
+      <p class="secao-subtitulo">
+        Sua contribuição ajuda a manter e expandir a obra de Deus
+      </p>
+      
+      <div class="contribuicoes-content">
+        <div class="qrcode-container">
+          <h3 style="margin-bottom: var(--espacamento-md);">PIX QR Code</h3>
+          <img src="assets/images/pix.png" alt="QR Code PIX" class="qrcode-imagem">
+          <p style="margin-top: var(--espacamento-sm); color: var(--cinza-medio);">
+            Escaneie o QR Code acima com seu app bancário
+          </p>
+        </div><!-- qrcode-container !-->
+        
+        <div class="dados-bancarios">
+          <h3>Dados Bancários</h3>
+          <p><strong>Igreja Presbiteriana Vida</strong></p>
+          <p><strong>CNPJ:</strong> 00.000.000/0001-00</p>
+          <p><strong>Banco:</strong> Bradesco (237)</p>
+          <p><strong>Agência:</strong> 0000-0</p>
+          <p><strong>Conta Corrente:</strong> 00000-0</p>
+          <p><strong>PIX (CNPJ):</strong> 00.000.000/0001-00</p>
+          
+          <div class="mt-3">
+            <button class="botao botao-secundario" @click="copiarPix()">
+              <span class="material-icons" style="vertical-align: middle;">content_copy</span> Copiar Chave PIX
+            </button>
+          </div>
+        </div><!-- dados-bancarios !-->
+      </div><!-- contribuicoes-content !-->
+    </div><!-- container !-->
+  </section><!-- contribuicoes !-->
+  
+  <!-- ==================== LOCALIZAÇÃO ==================== -->
+  <section id="localizacao" class="secao" style="background: var(--cinza-muito-claro);">
+    <div class="container">
+      <h2 class="secao-titulo">Localização</h2>
+      <p class="secao-subtitulo">
+        Venha nos visitar! Você é sempre bem-vindo
+      </p>
+      
+      <div class="localizacao-content">
+        <div class="mapa-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.438447055062!2d-47.060267!3d-22.897535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDUzJzUxLjIiUyA0N8KwMDMnMzYuNyJX!5e0!3m2!1spt-BR!2sbr!4v1234567890"
+            allowfullscreen 
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div><!-- mapa-container !-->
+        
+        <div class="info-localizacao">
+          <h3>Conheça nossa igreja</h3>
+            <p>
+            <strong><span class="material-icons" style="vertical-align: middle; font-size: 1.1em;">location_on</span> Endereço:</strong><br>
+            Av. Antonio Carlos do Amaral, s/n<br>
+            Residencial Cosmos<br>
+            Campinas - SP, 13059-582
+          </p>
+          
+          <p>
+            <strong><span class="material-icons" style="vertical-align: middle; font-size: 1.1em;">phone</span> Telefone:</strong><br>
+            (19) 99516-1006
+          </p>
+          
+          <div class="botoes-navegacao">
+            <button class="botao-navegacao maps" onclick="window.open('https://goo.gl/maps/YOUR_MAPS_LINK', '_blank')">
+              <span class="material-icons">map</span>
+              Google Maps
+            </button>
+            <button class="botao-navegacao waze" onclick="window.open('https://waze.com/ul?ll=-22.897535,-47.060267&navigate=yes', '_blank')">
+              <span class="material-icons">navigation</span>
+              Waze
+            </button>
+            <button class="botao-navegacao uber" onclick="window.open('https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=-22.897535&dropoff[longitude]=-47.060267', '_blank')">
+              <span class="material-icons">directions_car</span>
+              Uber
+            </button>
+          </div><!-- botoes-navegacao !-->
+          
+          <div class="horarios-cultos">
+            <h4 style="margin-bottom: var(--espacamento-xs); display: flex; align-items: center; gap: 8px;"><span class="material-icons">schedule</span>Horários dos Cultos</h4>
+            <p><strong>Sexta-feira:</strong> 20h00</p>
+            <p><strong>Domingo:</strong> 10h00</p>
+            <p style="margin-top: var(--espacamento-sm);">
+              <strong>Pastor:</strong> Rev. Enéias Mendes<br>
+              <a href="https://instagram.com/pr.eneiasmendes" target="_blank">@pr.eneiasmendes</a>
+            </p>
+          </div><!-- horarios-cultos !-->
+        </div><!-- info-localizacao !-->
+      </div><!-- localizacao-content !-->
+    </div><!-- container !-->
+  </section><!-- localizacao !-->
+  
+  <!-- ==================== CONTATO ==================== -->
+  <section id="contato" class="secao">
+    <div class="container">
+      <h2 class="secao-titulo">Entre em Contato</h2>
+      <p class="secao-subtitulo">
+        Envie sua mensagem, dúvida ou pedido de oração
+      </p>
+      
+      <div style="max-width: 700px; margin: 0 auto;">
+        <form x-data="formularioContato()" @submit.prevent="enviar()">
+          <div class="formulario-grupo">
+            <label class="formulario-label" for="nome">Nome Completo *</label>
+            <input type="text" id="nome" class="formulario-input" x-model="dados.nome" required>
+          </div>
+          
+          <div class="formulario-grupo">
+            <label class="formulario-label" for="email">E-mail *</label>
+            <input type="email" id="email" class="formulario-input" x-model="dados.email" required>
+          </div>
+          
+          <div class="formulario-grupo">
+            <label class="formulario-label" for="telefone">Telefone</label>
+            <input type="tel" id="telefone" class="formulario-input" x-model="dados.telefone">
+          </div>
+          
+          <div class="formulario-grupo">
+            <label class="formulario-label" for="assunto">Assunto *</label>
+            <select id="assunto" class="formulario-select" x-model="dados.assunto" required>
+              <option value="">Selecione...</option>
+              <option value="duvida">Dúvida sobre a Igreja</option>
+              <option value="visita">Quero Visitar</option>
+              <option value="oracao">Pedido de Oração</option>
+              <option value="batismo">Batismo</option>
+              <option value="casamento">Casamento</option>
+              <option value="outro">Outro Assunto</option>
+            </select>
+          </div>
+          
+          <div class="formulario-grupo">
+            <label class="formulario-label" for="mensagem">Mensagem *</label>
+            <textarea id="mensagem" class="formulario-textarea" x-model="dados.mensagem" required></textarea>
+          </div>
+          
+          <button type="submit" class="botao botao-primario botao-grande" style="width: 100%;">
+            <span class="material-icons" style="vertical-align: middle;">send</span> Enviar Mensagem
+          </button>
+        </form>
+      </div>
+    </div><!-- container !-->
+  </section><!-- contato !-->
+  
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-secao">
+          <img src="assets/images/logo-braco.png" alt="Logo IPV" style="height: 60px; margin-bottom: var(--espacamento-md);">
+          <p style="color: var(--cinza-leve); line-height: 1.8;">
+            Igreja Presbiteriana Vida<br>
+            Uma comunidade reformada<br>
+            comprometida com Cristo e Sua Palavra
+          </p>
+        </div><!-- footer-secao !-->
+        
+        <div class="footer-secao">
+          <h4>Links Rápidos</h4>
+          <ul class="footer-links">
+            <li><a href="#sobre">Sobre Nós</a></li>
+            <li><a href="#devocionais">Devocionais</a></li>
+            <li><a href="#eventos">Eventos</a></li>
+            <li><a href="paginas/confissao-fe.html">Confissão de Fé</a></li>
+            <li><a href="#contribuicoes">Contribuir</a></li>
+          </ul>
+        </div><!-- footer-secao !-->
+        
+        <div class="footer-secao">
+          <h4>Cultos</h4>
+          <ul class="footer-links">
+            <li>Sexta-feira: 20h</li>
+            <li>Domingo: 10h</li>
+            <li><a href="tel:+5519995161006">(19) 99516-1006</a></li>
+          </ul>
+        </div><!-- footer-secao !-->
+        
+        <div class="footer-secao">
+          <h4>Redes Sociais</h4>
+          <div class="footer-redes-sociais">
+            <a href="https://instagram.com/ip.vida" target="_blank" class="footer-rede-social" aria-label="Instagram">
+              <span class="material-icons">camera_alt</span>
+            </a>
+            <a href="https://youtube.com/@ipbvida" target="_blank" class="footer-rede-social" aria-label="YouTube">
+              <span class="material-icons">play_arrow</span>
+            </a>
+            <a href="https://facebook.com/ipvida" target="_blank" class="footer-rede-social" aria-label="Facebook">
+              <span class="material-icons">facebook</span>
+            </a>
+            <a href="mailto:contato@ipvida.com.br" class="footer-rede-social" aria-label="E-mail">
+              <span class="material-icons">email</span>
+            </a>
+          </div><!-- footer-redes-sociais !-->
+        </div><!-- footer-secao !-->
+      </div><!-- footer-content !-->
+      
+      <div class="footer-bottom">
+        <p>© 2025 Igreja Presbiteriana Vida. Todos os direitos reservados.</p>
+        <p>Desenvolvido por Matheus bonotto da squidev.com.br para a glória de Deus</p>
+      </div><!-- footer-bottom !-->
+    </div><!-- container !-->
+  </footer><!-- footer !-->
+  
+  <!-- ==================== BOTÕES ACESSIBILIDADE ==================== -->
+  <div class="acessibilidade-botoes" x-data="acessibilidade()">
+    <button class="botao-acessibilidade" @click="aumentarFonte()" title="Aumentar Fonte" aria-label="Aumentar tamanho da fonte">
+      <span style="font-size: 1.5rem;">A+</span>
+    </button>
+    
+    <button class="botao-acessibilidade" @click="diminuirFonte()" title="Diminuir Fonte" aria-label="Diminuir tamanho da fonte">
+      <span style="font-size: 1rem;">A-</span>
+    </button>
+    
+    <button class="botao-acessibilidade" @click="toggleContraste()" title="Alto Contraste" aria-label="Alternar alto contraste">
+      <span class="material-icons">contrast</span>
+    </button>
+    
+    <button class="botao-acessibilidade" @click="toggleNarracao()" title="Narrar Página" aria-label="Ativar/Desativar narração">
+      <span class="material-icons">volume_up</span>
+    </button>
+    
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper></div>
+    </div>
+  </div><!-- acessibilidade-botoes !-->
+  
+  <!-- JavaScript -->
+  <script src="js/aplicacao.js"></script>
+  <script src="js/api-integracao.js"></script>
+  <script src="js/interface.js"></script>
+  <script src="js/acessibilidade.js"></script>
+  
+  <!-- VLibras Init -->
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('js/service-worker.js')
+        .then(reg => console.log('Service Worker registrado'))
+        .catch(err => console.error('Erro ao registrar Service Worker:', err));
+    }
+  </script>
 </body>
 </html>

@@ -1,199 +1,73 @@
 {
-  "name": "IPVONLINE - Instituto Pastoral da Vida",
-  "short_name": "IPVONLINE",
-  "description": "Aplicativo do Instituto Pastoral da Vida com versículos diários, orações, conteúdo pastoral e funcionalidades para a comunidade religiosa.",
-  "version": "1.0.0",
-  "manifest_version": 3,
-  "start_url": "/",
-  "scope": "/",
+  "name": "IPV Online - Igreja Presbiteriana Vida",
+  "short_name": "IPV Online",
+  "description": "Site oficial da Igreja Presbiteriana Vida em Campinas-SP. Uma comunidade de fé, esperança e amor.",
+  "start_url": "/index.html",
   "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1A4731",
   "orientation": "portrait-primary",
-  "theme_color": "#1e40af",
-  "background_color": "#ffffff",
-  "lang": "pt-BR",
-  "dir": "ltr",
-  
   "icons": [
     {
-      "src": "/icons/icon-72x72.png",
-      "sizes": "72x72",
-      "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "/icons/icon-96x96.png",
-      "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "/icons/icon-128x128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "/icons/icon-144x144.png",
-      "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "/icons/icon-152x152.png",
-      "sizes": "152x152",
-      "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "/icons/icon-192x192.png",
+      "src": "assets/images/logo-preto.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any maskable"
     },
     {
-      "src": "/icons/icon-384x384.png",
-      "sizes": "384x384",
-      "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "/icons/icon-512x512.png",
+      "src": "assets/images/logo-preto.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any maskable"
     }
   ],
-  
-  "categories": [
-    "lifestyle",
-    "education",
-    "books",
-    "social"
-  ],
-  
+  "categories": ["religion", "church", "community"],
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "scope": "/",
   "shortcuts": [
     {
-      "name": "Versículo do Dia",
-      "short_name": "Versículo",
-      "description": "Ver o versículo bíblico do dia",
-      "url": "/?shortcut=versiculo",
+      "name": "Devocionais",
+      "short_name": "Devocionais",
+      "description": "Versículo, Salmo e Provérbio do Dia",
+      "url": "/index.html#devocionais",
       "icons": [
         {
-          "src": "/icons/shortcut-versiculo.png",
+          "src": "assets/images/logo-preto.png",
           "sizes": "192x192"
         }
       ]
     },
     {
-      "name": "Oração",
-      "short_name": "Oração",
-      "description": "Acessar seção de orações",
-      "url": "/?shortcut=oracao",
+      "name": "Cultos",
+      "short_name": "Cultos",
+      "description": "Assista aos cultos online",
+      "url": "/index.html#videos",
       "icons": [
         {
-          "src": "/icons/shortcut-oracao.png",
+          "src": "assets/images/logo-preto.png",
           "sizes": "192x192"
         }
       ]
     },
     {
-      "name": "Contato",
-      "short_name": "Contato",
-      "description": "Entrar em contato com o instituto",
-      "url": "/pages/contato.html",
+      "name": "Contribuir",
+      "short_name": "Contribuir",
+      "description": "Faça sua contribuição",
+      "url": "/index.html#contribuicoes",
       "icons": [
         {
-          "src": "/icons/shortcut-contato.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
-      "name": "Doações",
-      "short_name": "Doar",
-      "description": "Fazer uma doação",
-      "url": "/?shortcut=doacao",
-      "icons": [
-        {
-          "src": "/icons/shortcut-doacao.png",
+          "src": "assets/images/logo-preto.png",
           "sizes": "192x192"
         }
       ]
     }
   ],
-  
   "screenshots": [
     {
-      "src": "/screenshots/screenshot-home.png",
+      "src": "assets/images/foto-igreja.png",
       "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Página inicial do IPVONLINE"
-    },
-    {
-      "src": "/screenshots/screenshot-mobile.png",
-      "sizes": "750x1334",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "IPVONLINE em dispositivos móveis"
+      "type": "image/png"
     }
-  ],
-  
-  "prefer_related_applications": false,
-  "related_applications": [],
-  
-  "protocol_handlers": [
-    {
-      "protocol": "mailto",
-      "url": "/pages/contato.html?email=%s"
-    }
-  ],
-  
-  "launch_handler": {
-    "client_mode": "navigate-existing"
-  },
-  
-  "edge_side_panel": {
-    "preferred_width": 400
-  },
-  
-  "display_override": [
-    "window-controls-overlay",
-    "standalone",
-    "minimal-ui",
-    "browser"
-  ],
-  
-  "file_handlers": [
-    {
-      "action": "/",
-      "accept": {
-        "text/plain": [".txt"],
-        "application/json": [".json"]
-      }
-    }
-  ],
-  
-  "share_target": {
-    "action": "/pages/contato.html",
-    "method": "POST",
-    "enctype": "multipart/form-data",
-    "params": {
-      "title": "assunto",
-      "text": "mensagem",
-      "url": "url"
-    }
-  },
-  
-  "permissions": [
-    "notifications",
-    "background-sync"
-  ],
-  
-  "features": [
-    "Cross Origin Embedder Policy",
-    "Cross Origin Opener Policy"
-  ],
-  
-  "iarc_rating_id": "e58c174a-81d2-5c3c-32cc-34b8de4a52e9"
+  ]
 }

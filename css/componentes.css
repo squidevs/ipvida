@@ -1,0 +1,409 @@
+/* ============================================
+   COMPONENTES.CSS - Componentes reutilizáveis
+   Botões, cards, navbar, forms, etc.
+   ============================================ */
+
+/* ==================== NAVBAR ==================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--branco);
+  box-shadow: var(--sombra-media);
+  z-index: var(--z-fixed);
+  transition: var(--transicao-padrao);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--espacamento-sm) var(--espacamento-md);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--espacamento-sm);
+}
+
+.navbar-logo img {
+  height: 50px;
+  width: auto;
+}
+
+.navbar-logo-texto {
+  font-size: 1.25rem;
+  font-weight: var(--peso-bold);
+  color: var(--verde-escuro);
+  white-space: nowrap;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--espacamento-lg);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item a {
+  font-size: 1rem;
+  font-weight: var(--peso-medio);
+  color: var(--cinza-escuro);
+  padding: var(--espacamento-xs) var(--espacamento-sm);
+  border-radius: var(--borda-arredondada-sm);
+  transition: var(--transicao-rapida);
+  white-space: nowrap;
+}
+
+.navbar-item a:hover,
+.navbar-item a.ativo {
+  color: var(--verde-medio);
+  background: var(--cinza-muito-claro);
+  text-decoration: none;
+}
+
+.navbar-toggle {
+  display: none;
+  background: transparent;
+  border: 2px solid var(--verde-escuro);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--borda-arredondada-sm);
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  transition: var(--transicao-rapida);
+}
+
+.navbar-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--verde-escuro);
+  transition: var(--transicao-rapida);
+}
+
+.navbar-toggle:hover {
+  background: var(--verde-escuro);
+}
+
+.navbar-toggle:hover span {
+  background: var(--branco);
+}
+
+/* ==================== BOTÕES ==================== */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacamento-xs);
+  font-family: var(--fonte-principal);
+  font-size: 1rem;
+  font-weight: var(--peso-medio);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--borda-arredondada);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--transicao-rapida);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.botao-primario {
+  background: var(--verde-medio);
+  color: var(--branco);
+  border-color: var(--verde-medio);
+}
+
+.botao-primario:hover {
+  background: var(--verde-escuro);
+  border-color: var(--verde-escuro);
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-media);
+  text-decoration: none;
+}
+
+.botao-secundario {
+  background: var(--dourado);
+  color: var(--preto);
+  border-color: var(--dourado);
+}
+
+.botao-secundario:hover {
+  background: var(--dourado-hover);
+  border-color: var(--dourado-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-media);
+  text-decoration: none;
+}
+
+.botao-outline {
+  background: transparent;
+  color: var(--verde-medio);
+  border-color: var(--verde-medio);
+}
+
+.botao-outline:hover {
+  background: var(--verde-medio);
+  color: var(--branco);
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-media);
+  text-decoration: none;
+}
+
+.botao-grande {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+.botao-pequeno {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+/* ==================== CARDS ==================== */
+.card {
+  background: var(--branco);
+  border-radius: var(--borda-arredondada);
+  box-shadow: var(--sombra-suave);
+  overflow: hidden;
+  transition: var(--transicao-padrao);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  box-shadow: var(--sombra-forte);
+  transform: translateY(-4px);
+}
+
+.card-imagem {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-corpo {
+  padding: var(--espacamento-md);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-titulo {
+  font-size: 1.25rem;
+  font-weight: var(--peso-bold);
+  color: var(--verde-escuro);
+  margin-bottom: var(--espacamento-xs);
+}
+
+.card-texto {
+  color: var(--cinza-escuro);
+  margin-bottom: var(--espacamento-sm);
+  flex: 1;
+}
+
+.card-footer {
+  padding: var(--espacamento-sm) var(--espacamento-md);
+  background: var(--cinza-muito-claro);
+  border-top: 1px solid var(--cinza-leve);
+}
+
+/* ==================== FORMULÁRIOS ==================== */
+.formulario-grupo {
+  margin-bottom: var(--espacamento-md);
+}
+
+.formulario-label {
+  display: block;
+  font-weight: var(--peso-medio);
+  color: var(--cinza-escuro);
+  margin-bottom: var(--espacamento-xs);
+}
+
+.formulario-input,
+.formulario-textarea,
+.formulario-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: var(--fonte-principal);
+  font-size: 1rem;
+  color: var(--preto);
+  background: var(--branco);
+  border: 2px solid var(--cinza-leve);
+  border-radius: var(--borda-arredondada-sm);
+  transition: var(--transicao-rapida);
+}
+
+.formulario-input:focus,
+.formulario-textarea:focus,
+.formulario-select:focus {
+  outline: none;
+  border-color: var(--verde-medio);
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
+}
+
+.formulario-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* ==================== SEÇÕES ==================== */
+.secao {
+  padding: var(--espacamento-xxl) 0;
+}
+
+.secao-titulo {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: var(--peso-black);
+  color: var(--verde-escuro);
+  margin-bottom: var(--espacamento-xs);
+}
+
+.secao-subtitulo {
+  text-align: center;
+  font-size: 1.125rem;
+  color: var(--cinza-medio);
+  margin-bottom: var(--espacamento-xl);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==================== GRID RESPONSIVO ==================== */
+.grid {
+  display: grid;
+  gap: var(--espacamento-lg);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* ==================== BADGES ==================== */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: var(--peso-medio);
+  border-radius: 50px;
+  background: var(--cinza-leve);
+  color: var(--cinza-escuro);
+}
+
+.badge-verde {
+  background: var(--verde-claro);
+  color: var(--branco);
+}
+
+.badge-dourado {
+  background: var(--dourado);
+  color: var(--preto);
+}
+
+/* ==================== MODAL ==================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: var(--z-modal-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espacamento-md);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transicao-padrao);
+}
+
+.modal-overlay.ativo {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-conteudo {
+  background: var(--branco);
+  border-radius: var(--borda-arredondada-lg);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--sombra-forte);
+  transform: translateY(50px);
+  transition: var(--transicao-padrao);
+}
+
+.modal-overlay.ativo .modal-conteudo {
+  transform: translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--espacamento-md);
+  border-bottom: 1px solid var(--cinza-leve);
+}
+
+.modal-titulo {
+  font-size: 1.5rem;
+  font-weight: var(--peso-bold);
+  color: var(--verde-escuro);
+  margin: 0;
+}
+
+.modal-fechar {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--cinza-medio);
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--transicao-rapida);
+}
+
+.modal-fechar:hover {
+  background: var(--cinza-leve);
+  color: var(--preto);
+}
+
+.modal-corpo {
+  padding: var(--espacamento-md);
+}
+
+.modal-footer {
+  padding: var(--espacamento-md);
+  border-top: 1px solid var(--cinza-leve);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--espacamento-sm);
+}
+
+/* Fim componentes.css */
