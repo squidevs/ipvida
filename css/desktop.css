@@ -55,6 +55,25 @@
     gap: var(--espacamento-xl);
   }
 
+  .carrossel-programacao-slides {
+    min-height: 650px;
+  }
+
+  .card-programacao-imagem-full {
+    height: 650px;
+    padding: var(--espacamento-xxl);
+  }
+
+  .programacao-icone-grande {
+    width: 220px;
+    height: 220px;
+  }
+
+  .carrossel-seta-prog {
+    width: 45px;
+    height: 45px;
+  }
+
   .banner-vertical {
     min-height: 250px;
   }

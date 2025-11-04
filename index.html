@@ -274,51 +274,34 @@
       </p>
       
       <div class="programacao-grid" x-data="programacaoIgreja()">
-        <!-- Coluna 1: Carrossel de Banners Verticais -->
-        <div class="programacao-carrossel">
-          <div class="carrossel-wrapper">
-            <template x-for="(grupo, index) in gruposBanners" :key="index">
-              <div class="carrossel-slide" x-show="slideAtual === index" x-transition>
-                <template x-for="banner in grupo" :key="banner.id">
-                  <div class="banner-vertical">
-                    <div class="banner-conteudo">
-                      <div class="banner-imagem" :style="`background-image: url('${banner.imagem}');`"></div>
-                      <div class="banner-overlay" :style="`background: linear-gradient(135deg, ${banner.cor1}dd, ${banner.cor2}dd);`"></div>
-                      <div class="banner-data-badge">
-                        <div class="badge-dia" x-text="banner.dia"></div>
-                        <div class="badge-mes" x-text="banner.mes"></div>
-                      </div>
-                      <h3 class="banner-titulo" x-text="banner.titulo"></h3>
-                      <div class="banner-info">
-                        <span class="material-icons">schedule</span>
-                        <span x-text="banner.horario"></span>
-                      </div>
-                      <div class="banner-info">
-                        <span class="material-icons">place</span>
-                        <span x-text="banner.local"></span>
-                      </div>
-                    </div>
-                  </div>
-                </template>
+        <!-- Coluna 1: Carrossel de Programação -->
+        <div class="carrossel-programacao">
+          <div class="carrossel-programacao-slides">
+            <template x-for="(programa, index) in programas.slice(0, 6)" :key="programa.id">
+              <div class="card-programacao-vertical" :class="{ 'ativo': slideAtual === index }">
+                <div class="card-programacao-imagem-full" :style="`background: linear-gradient(135deg, ${programa.cor1}dd, ${programa.cor2}dd);`">
+                  <img :src="programa.imagem" :alt="programa.titulo" class="programacao-icone-grande">
+                </div>
               </div>
             </template>
           </div>
           
           <!-- Controles do Carrossel -->
-          <div class="carrossel-controles">
-            <button @click="anteriorSlide()" class="carrossel-seta">
+          <div class="carrossel-programacao-controles">
+            <button @click="anteriorSlide()" class="carrossel-seta-prog">
               <span class="material-icons">chevron_left</span>
             </button>
-            <div class="carrossel-indicadores">
-              <template x-for="(grupo, index) in gruposBanners" :key="index">
+            <div class="carrossel-programacao-indicadores">
+              <template x-for="(programa, index) in programas.slice(0, 6)" :key="index">
                 <button 
                   @click="slideAtual = index" 
-                  class="indicador"
+                  class="indicador-prog"
                   :class="{ 'ativo': slideAtual === index }"
-                ></button>
+                  :aria-label="'Slide ' + (index + 1)">
+                </button>
               </template>
             </div>
-            <button @click="proximoSlide()" class="carrossel-seta">
+            <button @click="proximoSlide()" class="carrossel-seta-prog">
               <span class="material-icons">chevron_right</span>
             </button>
           </div>
@@ -328,8 +311,8 @@
         <div class="programacao-lista">
           <h3 class="lista-titulo">Todas as Programações</h3>
           <div class="lista-scroll">
-            <template x-for="programa in programas" :key="programa.id">
-              <a :href="programa.link" class="programa-item">
+            <template x-for="(programa, index) in programas" :key="programa.id">
+              <a :href="programa.link" class="programa-item" :class="{ 'destaque': slideAtual === index && index < 6 }">
                 <div class="programa-data-badge">
                   <div class="badge-dia" x-text="programa.dia"></div>
                   <div class="badge-mes" x-text="programa.mes"></div>

@@ -371,34 +371,6 @@ function programacaoIgreja() {
           cor2: '#EC7063',
           imagem: 'assets/images/programacao/infantil.svg'
         },
-        {
-          id: 7,
-          titulo: 'Grupo de Casais',
-          dia: '16',
-          mes: 'nov',
-          horario: '20h00',
-          local: 'Residência',
-          categoria: 'GRUPOS',
-          corCategoria: '#16A085',
-          link: '#',
-          cor1: '#16A085',
-          cor2: '#1ABC9C',
-          imagem: 'assets/images/programacao/casais.svg'
-        },
-        {
-          id: 8,
-          titulo: 'Ação Social Comunitária',
-          dia: '17',
-          mes: 'nov',
-          horario: '14h00',
-          local: 'Comunidade',
-          categoria: 'MISSÕES',
-          corCategoria: '#9B59B6',
-          link: '#',
-          cor1: '#9B59B6',
-          cor2: '#8E44AD',
-          imagem: 'assets/images/programacao/social.svg'
-        }
       ];
     },
     
@@ -412,11 +384,13 @@ function programacaoIgreja() {
     },
     
     proximoSlide() {
-      this.slideAtual = (this.slideAtual + 1) % this.gruposBanners.length;
+      // Usa 6 programas individuais em vez de grupos
+      this.slideAtual = (this.slideAtual + 1) % 6;
     },
     
     anteriorSlide() {
-      this.slideAtual = this.slideAtual === 0 ? this.gruposBanners.length - 1 : this.slideAtual - 1;
+      // Usa 6 programas individuais em vez de grupos
+      this.slideAtual = this.slideAtual === 0 ? 5 : this.slideAtual - 1;
     },
     
     iniciarAutoPlay() {
