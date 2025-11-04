@@ -43,7 +43,49 @@ const CANAL_ID = 'UC-XXXXXXXXX'; // Cole o ID do canal
 
 ---
 
-## 📰 Notícias da IPB
+## 📖 Bible API (bible-api.com)
+
+### Como Funciona
+
+O site utiliza a **Bible API** (https://bible-api.com) para buscar versículos, salmos e provérbios em Português (tradução Almeida).
+
+### Vantagens:
+
+✅ **Totalmente Gratuita** - Sem necessidade de API Key  
+✅ **Sem Limites** - Requisições ilimitadas  
+✅ **Simples de Usar** - URL amigável e intuitiva  
+✅ **Tradução Almeida** - Versão tradicional em português  
+
+### Formato da API:
+
+```
+https://bible-api.com/{livro}+{capitulo}:{versiculo}?translation=almeida
+```
+
+**Exemplos:**
+```
+https://bible-api.com/john+3:16?translation=almeida
+https://bible-api.com/psalms+23:1?translation=almeida
+https://bible-api.com/proverbs+3:5?translation=almeida
+```
+
+### Recursos Implementados:
+
+✅ **Versículo do Dia** - 10 versículos inspiradores rotacionando aleatoriamente  
+✅ **Salmo do Dia** - Primeiro versículo de um salmo aleatório (1-150)  
+✅ **Provérbio do Dia** - Primeiro versículo de um provérbio aleatório (1-31)  
+✅ **Fallback Automático** - Versículos padrão caso a API falhe  
+
+### Observações:
+
+- ✅ **Não requer configuração** - Funciona imediatamente
+- ✅ **API pública e gratuita** - Mantida pela comunidade
+- ✅ **Resposta em JSON** - Fácil de integrar
+- ✅ **Documentação:** [https://bible-api.com](https://bible-api.com)
+
+---
+
+## �📰 Notícias da IPB
 
 ### Como Funciona
 

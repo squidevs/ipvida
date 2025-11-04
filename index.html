@@ -9,6 +9,9 @@
   
   <title>Igreja Presbiteriana Vida | Campinas-SP</title>
   
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⛪</text></svg>">
+  
   <!-- CSS -->
   <link rel="stylesheet" href="css/globais.css">
   <link rel="stylesheet" href="css/componentes.css">
@@ -20,6 +23,7 @@
   <link rel="manifest" href="manifest.json">
   
   <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   
   <!-- Material Icons -->
@@ -482,6 +486,22 @@
       <p class="secao-subtitulo">
         Nossa fé está firmada nas doutrinas bíblicas e reformadas
       </p>
+      
+      <!-- Botão App Símbolos de Fé -->
+      <div style="text-align: center; margin-bottom: var(--espacamento-lg);">
+        <a href="https://play.google.com/store/apps/details?id=br.com.maartins.sfipb&hl=pt_BR" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="botao botao-primario"
+           style="display: inline-flex; align-items: center; gap: 10px; font-size: 1rem;">
+          <i class="bi bi-phone"></i>
+          Baixar App Símbolos de Fé IPB
+          <i class="bi bi-google-play"></i>
+        </a>
+        <p style="margin-top: var(--espacamento-xs); color: var(--cinza-medio); font-size: 0.875rem;">
+          Acesse a Confissão de Fé, Catecismos e documentos doutrinários no seu celular
+        </p>
+      </div>
       
       <div style="max-width: 900px; margin: 0 auto;" x-data="{ aberto: null }">
         <!-- Escrituras -->

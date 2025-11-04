@@ -116,67 +116,113 @@ async function buscarNoticiasIPB() {
   }
 }
 
-// Bíblia Online API
+// ============================================
+// Bible API (bible-api.com) - API Gratuita
+// ============================================
+
+// IDs dos livros para versículo aleatório (EXCLUINDO Salmos e Provérbios)
+const LIVROS_VERSICULO = 'GEN,EXO,LEV,NUM,DEU,JOS,JDG,RUT,1SA,2SA,1KI,2KI,1CH,2CH,EZR,NEH,EST,JOB,ISA,JER,LAM,EZK,DAN,HOS,JOL,AMO,OBA,JON,MIC,NAH,HAB,ZEP,HAG,ZEC,MAL,MAT,MRK,LUK,JHN,ACT,ROM,1CO,2CO,GAL,EPH,PHP,COL,1TH,2TH,1TI,2TI,TIT,PHM,HEB,JAS,1PE,2PE,1JN,2JN,3JN,JUD,REV';
+
+// Versículo do Dia - APENAS livros que NÃO sejam Salmos (PSA) ou Provérbios (PRO)
 async function buscarVersiculoAleatorio() {
   try {
-    const response = await fetch('https://www.abibliadigital.com.br/api/verses/nvi/random');
-    const data = await response.json();
+    const url = `https://bible-api.com/data/almeida/random/${LIVROS_VERSICULO}`;
+    console.log('🔍 Buscando versículo em:', url);
+    const response = await fetch(url);
     
-    return {
-      texto: data.text,
-      referencia: `${data.book.name} ${data.chapter}:${data.number}`,
-      livro: data.book.name,
-      capitulo: data.chapter,
-      versiculo: data.number
-    };
+    if (!response.ok) {
+      throw new Error(`Erro HTTP: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    console.log('📥 Resposta da API (versículo):', data);
+    
+    // A API retorna random_verse
+    if (data && data.random_verse) {
+      const verse = data.random_verse;
+      return {
+        texto: verse.text.trim(),
+        referencia: `${verse.book} ${verse.chapter}:${verse.verse}`,
+        livro: verse.book,
+        capitulo: verse.chapter,
+        versiculo: verse.verse
+      };
+    }
+    
+    console.warn('⚠️ API retornou dados sem versículos');
+    return null;
   } catch (erro) {
-    console.error('Erro ao buscar versículo:', erro);
+    console.error('❌ Erro ao buscar versículo aleatório:', erro);
     return null;
   }
 }
 
+// Salmo do Dia - APENAS do livro de Salmos (PSA)
 async function buscarSalmoAleatorio() {
   try {
-    // Salmos tem 150 capítulos
-    const numeroSalmo = Math.floor(Math.random() * 150) + 1;
-    const response = await fetch(`https://www.abibliadigital.com.br/api/verses/nvi/sl/${numeroSalmo}`);
-    const data = await response.json();
+    // BLOQUEIO: USA APENAS o livro de Salmos (PSA)
+    const url = 'https://bible-api.com/data/almeida/random/PSA';
+    console.log('🔍 Buscando salmo em:', url);
+    const response = await fetch(url);
     
-    if (data.verses && data.verses.length > 0) {
-      const versiculoAleatorio = data.verses[Math.floor(Math.random() * data.verses.length)];
+    if (!response.ok) {
+      throw new Error(`Erro HTTP: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    console.log('📥 Resposta da API (salmo):', data);
+    
+    // A API retorna random_verse
+    if (data && data.random_verse) {
+      const verse = data.random_verse;
       return {
-        texto: versiculoAleatorio.text,
-        referencia: `Salmos ${numeroSalmo}:${versiculoAleatorio.number}`,
+        texto: verse.text.trim(),
+        referencia: `Salmos ${verse.chapter}:${verse.verse}`,
         livro: 'Salmos',
-        capitulo: numeroSalmo,
-        versiculo: versiculoAleatorio.number
+        capitulo: verse.chapter,
+        versiculo: verse.verse
       };
     }
+    
+    console.warn('⚠️ API retornou dados sem versículos');
+    return null;
   } catch (erro) {
-    console.error('Erro ao buscar salmo:', erro);
+    console.error('❌ Erro ao buscar salmo:', erro);
     return null;
   }
 }
 
+// Provérbio do Dia - APENAS do livro de Provérbios (PRO)
 async function buscarProverbioAleatorio() {
   try {
-    // Provérbios tem 31 capítulos
-    const numeroCapitulo = Math.floor(Math.random() * 31) + 1;
-    const response = await fetch(`https://www.abibliadigital.com.br/api/verses/nvi/pv/${numeroCapitulo}`);
-    const data = await response.json();
+    // BLOQUEIO: USA APENAS o livro de Provérbios (PRO)
+    const url = 'https://bible-api.com/data/almeida/random/PRO';
+    console.log('🔍 Buscando provérbio em:', url);
+    const response = await fetch(url);
     
-    if (data.verses && data.verses.length > 0) {
-      const versiculoAleatorio = data.verses[Math.floor(Math.random() * data.verses.length)];
+    if (!response.ok) {
+      throw new Error(`Erro HTTP: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    console.log('📥 Resposta da API (provérbio):', data);
+    
+    // A API retorna random_verse
+    if (data && data.random_verse) {
+      const verse = data.random_verse;
       return {
-        texto: versiculoAleatorio.text,
-        referencia: `Provérbios ${numeroCapitulo}:${versiculoAleatorio.number}`,
+        texto: verse.text.trim(),
+        referencia: `Provérbios ${verse.chapter}:${verse.verse}`,
         livro: 'Provérbios',
-        capitulo: numeroCapitulo,
-        versiculo: versiculoAleatorio.number
+        capitulo: verse.chapter,
+        versiculo: verse.verse
       };
     }
+    
+    console.warn('⚠️ API retornou dados sem versículos');
+    return null;
   } catch (erro) {
-    console.error('Erro ao buscar provérbio:', erro);
+    console.error('❌ Erro ao buscar provérbio:', erro);
     return null;
   }
 }

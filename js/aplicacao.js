@@ -59,17 +59,17 @@ function carrosselDevocionais() {
     slideAtual: 0,
     autoplay: null,
     versiculoDia: {
-      texto: '"Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna."',
-      referencia: 'João 3:16'
+      texto: '"Carregando."',
+      referencia: 'Carregando'
     },
     salmoDia: {
-      texto: '"O SENHOR é o meu pastor; nada me faltará. Deitar-me faz em verdes pastos, guia-me mansamente a águas tranquilas."',
-      referencia: 'Salmos 23:1-2'
-    },
+      texto: '"Carregando."',
+      referencia: 'Carregando'
+      },
     proberbioDia: {
-      texto: '"Confia no SENHOR de todo o teu coração e não te estribes no teu próprio entendimento. Reconhece-o em todos os teus caminhos, e ele endireitará as tuas veredas."',
-      referencia: 'Provérbios 3:5-6'
-    },
+      texto: '"Carregando."',
+      referencia: 'Carregando'
+      },
     
     init() {
       this.carregarVersiculos();
@@ -78,18 +78,85 @@ function carrosselDevocionais() {
     
     async carregarVersiculos() {
       try {
-        // Buscar versículo do dia da API Bíblia Online
-        const response = await fetch('https://www.abibliadigital.com.br/api/verses/nvi/random');
-        const data = await response.json();
+        // Verificar se já existem versículos salvos no localStorage
+        const cacheKey = 'versiculos_dia_cache';
+        const cache = localStorage.getItem(cacheKey);
         
-        if (data.text && data.book && data.chapter && data.number) {
-          this.versiculoDia = {
-            texto: `"${data.text}"`,
-            referencia: `${data.book.name} ${data.chapter}:${data.number}`
-          };
+        if (cache) {
+          const dados = JSON.parse(cache);
+          const agora = new Date().getTime();
+          const tempoDecorrido = agora - dados.timestamp;
+          const horasDecorridas = tempoDecorrido / (1000 * 60 * 60);
+          
+          // Se passou menos de 24 horas, usar cache
+          if (horasDecorridas < 24) {
+            console.log(`🔒 Usando versículos em cache (${Math.floor(horasDecorridas)}h${Math.floor((horasDecorridas % 1) * 60)}min atrás)`);
+            this.versiculoDia = dados.versiculoDia;
+            this.salmoDia = dados.salmoDia;
+            this.proberbioDia = dados.proberbioDia;
+            console.log('✅ Versículos carregados do cache!');
+            return;
+          } else {
+            console.log('⏰ Cache expirou (24h), buscando novos versículos...');
+          }
         }
+        
+        // Buscar novos versículos da API
+        console.log('🔄 Buscando novos versículos da API...');
+        
+        // Buscar Versículo do Dia usando bible-api.com
+        const versiculoDados = await buscarVersiculoAleatorio();
+        console.log('📖 Versículo recebido:', versiculoDados);
+        if (versiculoDados) {
+          this.versiculoDia = {
+            texto: `"${versiculoDados.texto}"`,
+            referencia: versiculoDados.referencia
+          };
+          console.log('✅ Versículo do Dia atualizado:', this.versiculoDia);
+        } else {
+          console.warn('⚠️ Versículo do Dia não retornou dados');
+        }
+        
+        // Buscar Salmo do Dia
+        const salmoDados = await buscarSalmoAleatorio();
+        console.log('📖 Salmo recebido:', salmoDados);
+        if (salmoDados) {
+          this.salmoDia = {
+            texto: `"${salmoDados.texto}"`,
+            referencia: salmoDados.referencia
+          };
+          console.log('✅ Salmo do Dia atualizado:', this.salmoDia);
+        } else {
+          console.warn('⚠️ Salmo do Dia não retornou dados');
+        }
+        
+        // Buscar Provérbio do Dia
+        const proverbioDados = await buscarProverbioAleatorio();
+        console.log('📖 Provérbio recebido:', proverbioDados);
+        if (proverbioDados) {
+          this.proberbioDia = {
+            texto: `"${proverbioDados.texto}"`,
+            referencia: proverbioDados.referencia
+          };
+          console.log('✅ Provérbio do Dia atualizado:', this.proberbioDia);
+        } else {
+          console.warn('⚠️ Provérbio do Dia não retornou dados');
+        }
+        
+        // Salvar no localStorage com timestamp
+        const dadosCache = {
+          timestamp: new Date().getTime(),
+          versiculoDia: this.versiculoDia,
+          salmoDia: this.salmoDia,
+          proberbioDia: this.proberbioDia
+        };
+        localStorage.setItem(cacheKey, JSON.stringify(dadosCache));
+        console.log('💾 Versículos salvos em cache (válido por 24h)');
+        
+        console.log('✅ Versículos carregados da Bible API com sucesso!');
       } catch (erro) {
-        console.log('Usando versículos padrão');
+        console.error('❌ Erro ao carregar versículos:', erro);
+        console.log('⚠️ Usando versículos padrão');
       }
     },
     
@@ -157,7 +224,7 @@ function videosYoutube() {
           this.videos = videosAPI;
         } else {
           // Fallback: Últimos 9 cultos da IPB Vida
-          this.videos = [
+            this.videos = [
             {
               id: 'H3vpXaanS4Y',
               titulo: 'Culto Dominical - IPB Vida',
@@ -238,48 +305,57 @@ function videosYoutube() {
               url: 'https://www.youtube.com/watch?v=32gwoMw7d0s',
               duracao: '1:50:25',
               data: '2025-10-06'
+            },
+            {
+              id: '3iTABypGsrw',
+              titulo: 'Culto IPB Vida',
+              descricao: 'Culto de adoração e pregação',
+              thumbnail: 'https://i.ytimg.com/vi/3iTABypGsrw/hqdefault.jpg',
+              url: 'https://www.youtube.com/watch?v=3iTABypGsrw',
+              duracao: '10:09',
+              data: '2020-07-24'
             }
-          ];
+            ];
+          }
+          } catch (erro) {
+          console.error('Erro ao carregar vídeos:', erro);
+          } finally {
+          this.carregando = false;
+          }
+        },
+        
+        inscreverCanal() {
+          window.open('https://youtube.com/@ipbvida?sub_confirmation=1', '_blank');
+        },
+        
+        assistirAoVivo() {
+          if (this.live && this.live.aoVivo) {
+          window.open(this.live.url, '_blank');
+          } else {
+          alert('Não há transmissão ao vivo no momento. Inscreva-se para ser notificado!');
+          }
+        },
+        
+        formatarData(dataString) {
+          if (!dataString) return '';
+          const data = new Date(dataString + 'T00:00:00');
+          return data.toLocaleDateString('pt-BR', { 
+          day: '2-digit', 
+          month: 'short',
+          year: 'numeric'
+          });
         }
-      } catch (erro) {
-        console.error('Erro ao carregar vídeos:', erro);
-      } finally {
-        this.carregando = false;
+        };
       }
-    },
-    
-    inscreverCanal() {
-      window.open('https://youtube.com/@ipbvida?sub_confirmation=1', '_blank');
-    },
-    
-    assistirAoVivo() {
-      if (this.live && this.live.aoVivo) {
-        window.open(this.live.url, '_blank');
-      } else {
-        alert('Não há transmissão ao vivo no momento. Inscreva-se para ser notificado!');
-      }
-    },
-    
-    formatarData(dataString) {
-      if (!dataString) return '';
-      const data = new Date(dataString + 'T00:00:00');
-      return data.toLocaleDateString('pt-BR', { 
-        day: '2-digit', 
-        month: 'short',
-        year: 'numeric'
-      });
-    }
-  };
-}
 
-// Programação
-function programacaoIgreja() {
-  return {
-    slideAtual: 0,
-    programas: [],
-    gruposBanners: [],
-    
-    init() {
+      // Programação
+      function programacaoIgreja() {
+        return {
+        slideAtual: 0,
+        programas: [],
+        gruposBanners: [],
+        
+        init() {
       this.carregarProgramacao();
       this.agruparBanners();
       this.iniciarAutoPlay();
