@@ -7,6 +7,7 @@ function acessibilidade() {
     tamanhoFonte: 100,
     contrasteAtivo: false,
     narracaoAtiva: false,
+    menuAberto: false,
     synth: null,
     
     init() {

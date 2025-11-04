@@ -22,6 +22,7 @@
   padding: var(--espacamento-sm) var(--espacamento-md);
   max-width: 1400px;
   margin: 0 auto;
+  min-height: 70px;
 }
 
 .navbar-logo {
@@ -45,14 +46,15 @@
 .navbar-menu {
   display: flex;
   align-items: center;
-  gap: var(--espacamento-lg);
+  gap: clamp(0.5rem, 2vw, 2rem);
   list-style: none;
   margin: 0;
   padding: 0;
+  flex-wrap: wrap;
 }
 
 .navbar-item a {
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 1vw, 1rem);
   font-weight: var(--peso-medio);
   color: var(--cinza-escuro);
   padding: var(--espacamento-xs) var(--espacamento-sm);
@@ -97,6 +99,98 @@
 
 .navbar-toggle:hover span {
   background: var(--branco);
+}
+
+/* ==================== NAVBAR DROPDOWN ==================== */
+.navbar-dropdown {
+  position: relative;
+}
+
+.navbar-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.navbar-dropdown-toggle .material-icons {
+  transition: transform 0.3s ease;
+}
+
+.navbar-submenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: var(--branco);
+  border-radius: var(--borda-arredondada);
+  box-shadow: var(--sombra-forte);
+  list-style: none;
+  padding: var(--espacamento-xs) 0;
+  margin: 0;
+  min-width: 200px;
+  z-index: var(--z-dropdown);
+  border: 2px solid var(--cinza-leve);
+}
+
+.navbar-submenu::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--cinza-leve);
+}
+
+.navbar-submenu::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 21px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid var(--branco);
+}
+
+.navbar-submenu li {
+  margin: 0;
+}
+
+.navbar-submenu a {
+  display: block;
+  padding: var(--espacamento-sm) var(--espacamento-md);
+  color: var(--cinza-escuro);
+  font-weight: var(--peso-normal);
+  transition: var(--transicao-rapida);
+  position: relative;
+}
+
+.navbar-submenu a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--verde-medio);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.navbar-submenu a:hover::before {
+  transform: scaleY(1);
+}
+
+.navbar-submenu a:hover {
+  background: var(--cinza-muito-claro);
+  color: var(--verde-medio);
+  text-decoration: none;
+  padding-left: calc(var(--espacamento-md) + 8px);
 }
 
 /* ==================== BOTÕES ==================== */

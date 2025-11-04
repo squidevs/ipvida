@@ -159,6 +159,127 @@ function videosYoutube() {
   };
 }
 
+// Programação
+function programacaoIgreja() {
+  return {
+    slideAtual: 0,
+    programas: [],
+    gruposBanners: [],
+    
+    init() {
+      this.carregarProgramacao();
+      this.agruparBanners();
+      this.iniciarAutoPlay();
+    },
+    
+    carregarProgramacao() {
+      this.programas = [
+        {
+          id: 1,
+          titulo: 'Proteção de Dados na Igreja e nos Concílios',
+          dia: '16',
+          mes: 'out',
+          horario: '19h30',
+          local: 'Templo Principal',
+          categoria: 'DESTAQUES',
+          corCategoria: '#1A4731',
+          link: '#',
+          cor1: '#1A4731',
+          cor2: '#2D5F4A'
+        },
+        {
+          id: 2,
+          titulo: 'A Reforma Protestante do Século XVI',
+          dia: '10',
+          mes: 'out',
+          horario: '20h00',
+          local: 'Auditório',
+          categoria: 'ÚLTIMAS',
+          corCategoria: '#2C3E50',
+          link: '#',
+          cor1: '#2C3E50',
+          cor2: '#34495E'
+        },
+        {
+          id: 3,
+          titulo: 'Outubro Rosa - Cuidado da Mulher',
+          dia: '02',
+          mes: 'out',
+          horario: '15h00',
+          local: 'Salão de Eventos',
+          categoria: 'INFORMATIVOS',
+          corCategoria: '#8B3A62',
+          link: '#',
+          cor1: '#8B3A62',
+          cor2: '#A94976'
+        },
+        {
+          id: 4,
+          titulo: 'Mês da Reforma Protestante',
+          dia: '01',
+          mes: 'out',
+          horario: 'Todo o mês',
+          local: 'Diversos locais',
+          categoria: 'ARTIGOS',
+          corCategoria: '#D4AF37',
+          link: '#',
+          cor1: '#D4AF37',
+          cor2: '#C9A352'
+        },
+        {
+          id: 5,
+          titulo: 'Primeira Edição do Congresso APECOM',
+          dia: '25',
+          mes: 'set',
+          horario: '09h00',
+          local: 'Gravatá-PE',
+          categoria: 'BRASIL PRESBITERIANO',
+          corCategoria: '#3498DB',
+          link: '#',
+          cor1: '#3498DB',
+          cor2: '#5DADE2'
+        },
+        {
+          id: 6,
+          titulo: 'UPHs em Ação',
+          dia: '22',
+          mes: 'set',
+          horario: 'Diversos horários',
+          local: 'Todo o Brasil',
+          categoria: 'NOTÍCIAS',
+          corCategoria: '#E74C3C',
+          link: '#',
+          cor1: '#E74C3C',
+          cor2: '#EC7063'
+        }
+      ];
+    },
+    
+    agruparBanners() {
+      // Agrupa os primeiros 6 programas em grupos de 3 para o carrossel
+      const banners = this.programas.slice(0, 6);
+      this.gruposBanners = [];
+      for (let i = 0; i < banners.length; i += 3) {
+        this.gruposBanners.push(banners.slice(i, i + 3));
+      }
+    },
+    
+    proximoSlide() {
+      this.slideAtual = (this.slideAtual + 1) % this.gruposBanners.length;
+    },
+    
+    anteriorSlide() {
+      this.slideAtual = this.slideAtual === 0 ? this.gruposBanners.length - 1 : this.slideAtual - 1;
+    },
+    
+    iniciarAutoPlay() {
+      setInterval(() => {
+        this.proximoSlide();
+      }, 5000);
+    }
+  };
+}
+
 // Eventos
 function eventosIgreja() {
   return {

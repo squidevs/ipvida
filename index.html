@@ -40,14 +40,27 @@
       
       <ul class="navbar-menu" :class="{ 'aberto': menuAberto }">
         <li class="navbar-item"><a href="#inicio" @click="fecharMenu">Início</a></li>
-        <li class="navbar-item"><a href="#sobre">Sobre</a></li>
-        <li class="navbar-item"><a href="#devocionais">Devocionais</a></li>
-        <li class="navbar-item"><a href="#videos">Cultos</a></li>
-        <li class="navbar-item"><a href="#eventos">Eventos</a></li>
-        <li class="navbar-item"><a href="#cremos">O Que Cremos</a></li>
-        <li class="navbar-item"><a href="#contribuicoes">Contribuir</a></li>
-        <li class="navbar-item"><a href="#localizacao">Localização</a></li>
-        <li class="navbar-item"><a href="#contato">Contato</a></li>
+        <li class="navbar-item"><a href="#sobre" @click="fecharMenu">Sobre</a></li>
+        
+        <!-- Dropdown: Conteúdo -->
+        <li class="navbar-item navbar-dropdown" x-data="{ dropdown: false }">
+          <a href="#" @click.prevent="dropdown = !dropdown" class="navbar-dropdown-toggle">
+            Conteúdo
+            <span class="material-icons" style="font-size: 1rem; vertical-align: middle;" x-text="dropdown ? 'expand_less' : 'expand_more'">
+            </span>
+          </a>
+          <ul class="navbar-submenu" x-show="dropdown" @click.away="dropdown = false" x-transition>
+            <li><a href="#devocionais" @click="fecharMenu; dropdown = false">Devocionais</a></li>
+            <li><a href="#videos" @click="fecharMenu; dropdown = false">Cultos</a></li>
+            <li><a href="#programacao" @click="fecharMenu; dropdown = false">Programação</a></li>
+            <li><a href="#eventos" @click="fecharMenu; dropdown = false">Eventos</a></li>
+            <li><a href="#cremos" @click="fecharMenu; dropdown = false">O Que Cremos</a></li>
+          </ul>
+        </li><!-- navbar-dropdown !-->
+        
+        <li class="navbar-item"><a href="#contribuicoes" @click="fecharMenu">Contribuir</a></li>
+        <li class="navbar-item"><a href="#localizacao" @click="fecharMenu">Localização</a></li>
+        <li class="navbar-item"><a href="#contato" @click="fecharMenu">Contato</a></li>
       </ul><!-- navbar-menu !-->
       
       <button class="navbar-toggle" @click="menuAberto = !menuAberto" aria-label="Menu">
@@ -64,9 +77,9 @@
     <div class="hero-overlay"></div>
     
     <div class="hero-conteudo fade-in">
-      <h1 class="hero-titulo">Igreja Presbiteriana Vida</h1>
+      <img src="assets/images/logo-braco.png" width="250" alt="logo branca">
       <p class="hero-subtitulo">
-        Uma comunidade de fé, esperança e amor<br>
+        Uma comunidade de fé, esperança e amor
         Venha nos visitar e conhecer mais sobre Jesus Cristo
       </p>
       
@@ -216,6 +229,94 @@
       </div>
     </div><!-- container !-->
   </section><!-- videos !-->
+  
+  <!-- ==================== PROGRAMAÇÃO ==================== -->
+  <section id="programacao" class="secao" style="background: var(--branco);">
+    <div class="container">
+      <h2 class="secao-titulo">Programação</h2>
+      <p class="secao-subtitulo">
+        Confira a programação completa da nossa igreja
+      </p>
+      
+      <div class="programacao-grid" x-data="programacaoIgreja()">
+        <!-- Coluna 1: Carrossel de Banners Verticais -->
+        <div class="programacao-carrossel">
+          <div class="carrossel-wrapper">
+            <template x-for="(grupo, index) in gruposBanners" :key="index">
+              <div class="carrossel-slide" x-show="slideAtual === index" x-transition>
+                <template x-for="banner in grupo" :key="banner.id">
+                  <div class="banner-vertical">
+                    <div class="banner-conteudo" :style="`background: linear-gradient(135deg, ${banner.cor1}, ${banner.cor2})`">
+                      <div class="banner-data-badge">
+                        <div class="badge-dia" x-text="banner.dia"></div>
+                        <div class="badge-mes" x-text="banner.mes"></div>
+                      </div>
+                      <h3 class="banner-titulo" x-text="banner.titulo"></h3>
+                      <p class="banner-subtitulo" x-text="banner.subtitulo"></p>
+                      <div class="banner-info">
+                        <span class="material-icons">schedule</span>
+                        <span x-text="banner.horario"></span>
+                      </div>
+                      <div class="banner-info">
+                        <span class="material-icons">place</span>
+                        <span x-text="banner.local"></span>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </template>
+          </div>
+          
+          <!-- Controles do Carrossel -->
+          <div class="carrossel-controles">
+            <button @click="anteriorSlide()" class="carrossel-seta">
+              <span class="material-icons">chevron_left</span>
+            </button>
+            <div class="carrossel-indicadores">
+              <template x-for="(grupo, index) in gruposBanners" :key="index">
+                <button 
+                  @click="slideAtual = index" 
+                  class="indicador"
+                  :class="{ 'ativo': slideAtual === index }"
+                ></button>
+              </template>
+            </div>
+            <button @click="proximoSlide()" class="carrossel-seta">
+              <span class="material-icons">chevron_right</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Coluna 2: Lista Completa com Scroll -->
+        <div class="programacao-lista">
+          <h3 class="lista-titulo">Todas as Programações</h3>
+          <div class="lista-scroll">
+            <template x-for="programa in programas" :key="programa.id">
+              <a :href="programa.link" class="programa-item">
+                <div class="programa-data-badge">
+                  <div class="badge-dia" x-text="programa.dia"></div>
+                  <div class="badge-mes" x-text="programa.mes"></div>
+                </div>
+                <div class="programa-info">
+                  <h4 class="programa-titulo" x-text="programa.titulo"></h4>
+                  <p class="programa-detalhes">
+                    <span class="material-icons">schedule</span>
+                    <span x-text="programa.horario"></span>
+                    <span class="separador">•</span>
+                    <span class="material-icons">place</span>
+                    <span x-text="programa.local"></span>
+                  </p>
+                  <span class="programa-categoria" :style="`background: ${programa.corCategoria}`" x-text="programa.categoria"></span>
+                </div>
+                <span class="material-icons programa-seta">chevron_right</span>
+              </a>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div><!-- container !-->
+  </section><!-- programacao !-->
   
   <!-- ==================== EVENTOS ==================== -->
   <section id="eventos" class="secao" style="background: var(--cinza-muito-claro);">
@@ -451,7 +552,7 @@
       
       <div class="text-center mt-5">
         <a href="paginas/confissao-fe.html" class="botao botao-primario botao-grande">
-          <span class="material-icons" style="vertical-align: middle;">description</span> Ler Confissão de Fé de Westminster Completa
+          <span class="material-icons" style="vertical-align: middle;">description</span> Continuar lendo
         </a>
       </div>
     </div><!-- container !-->
@@ -665,28 +766,43 @@
   </footer><!-- footer !-->
   
   <!-- ==================== BOTÕES ACESSIBILIDADE ==================== -->
-  <div class="acessibilidade-botoes" x-data="acessibilidade()">
-    <button class="botao-acessibilidade" @click="aumentarFonte()" title="Aumentar Fonte" aria-label="Aumentar tamanho da fonte">
-      <span style="font-size: 1.5rem;">A+</span>
+  <div class="acessibilidade-container" x-data="acessibilidade()" @click.away="menuAberto = false">
+    
+    <!-- Botões Expandidos (aparecem acima) -->
+    <div class="acessibilidade-botoes-expandidos" x-show="menuAberto" x-transition>
+      <button class="botao-acessibilidade" @click="aumentarFonte()" title="Aumentar Fonte" aria-label="Aumentar fonte">
+        <span style="font-size: 1.5rem; font-weight: bold;">A+</span>
+      </button>
+      
+      <button class="botao-acessibilidade" @click="diminuirFonte()" title="Diminuir Fonte" aria-label="Diminuir fonte">
+        <span style="font-size: 1rem; font-weight: bold;">A-</span>
+      </button>
+      
+      <button class="botao-acessibilidade" @click="toggleContraste()" title="Alto Contraste" aria-label="Alto contraste" :class="{ 'ativo': contrasteAtivo }">
+        <span class="material-icons">contrast</span>
+      </button>
+      
+      <button class="botao-acessibilidade" @click="toggleNarracao()" title="Narrar Página" aria-label="Narrar página" :class="{ 'ativo': narracaoAtiva }">
+        <span class="material-icons">volume_up</span>
+      </button>
+    </div><!-- acessibilidade-botoes-expandidos !-->
+    
+    <!-- Botão Principal (sempre visível) -->
+    <button 
+      class="botao-acessibilidade botao-acessibilidade-principal" 
+      @click="menuAberto = !menuAberto" 
+      :class="{ 'ativo': menuAberto }"
+      title="Menu de Acessibilidade" 
+      aria-label="Menu de acessibilidade">
+      <span class="material-icons">accessibility</span>
     </button>
     
-    <button class="botao-acessibilidade" @click="diminuirFonte()" title="Diminuir Fonte" aria-label="Diminuir tamanho da fonte">
-      <span style="font-size: 1rem;">A-</span>
-    </button>
-    
-    <button class="botao-acessibilidade" @click="toggleContraste()" title="Alto Contraste" aria-label="Alternar alto contraste">
-      <span class="material-icons">contrast</span>
-    </button>
-    
-    <button class="botao-acessibilidade" @click="toggleNarracao()" title="Narrar Página" aria-label="Ativar/Desativar narração">
-      <span class="material-icons">volume_up</span>
-    </button>
-    
+    <!-- VLibras -->
     <div vw class="enabled">
       <div vw-access-button class="active"></div>
       <div vw-plugin-wrapper></div>
     </div>
-  </div><!-- acessibilidade-botoes !-->
+  </div><!-- acessibilidade-container !-->
   
   <!-- JavaScript -->
   <script src="js/aplicacao.js"></script>

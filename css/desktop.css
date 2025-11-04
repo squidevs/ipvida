@@ -32,6 +32,24 @@
     font-size: 1.75rem;
   }
 
+  /* Programação */
+  .programacao-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--espacamento-xl);
+  }
+
+  .carrossel-slide {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .banner-vertical {
+    min-height: 250px;
+  }
+
+  .lista-scroll {
+    max-height: 650px;
+  }
+
   /* Eventos */
   .eventos-container {
     display: grid;
@@ -171,15 +189,22 @@
   }
 
   /* Botões Acessibilidade Desktop */
-  .acessibilidade-botoes {
+  .acessibilidade-container {
     bottom: 30px;
     right: 30px;
   }
 
-  .botao-acessibilidade {
-    width: 55px;
-    height: 55px;
-    font-size: 1.375rem;
+  .botao-acessibilidade-principal {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .botao-acessibilidade-principal .material-icons {
+    font-size: 2rem;
+  }
+  
+  .acessibilidade-menu {
+    min-width: 220px;
   }
 }
 
@@ -204,6 +229,37 @@
   /* Eventos */
   .eventos-container {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ==================== NAVBAR ADAPTATIVA (quando fonte aumenta) ==================== */
+@media (max-width: 1200px) {
+  .navbar-menu {
+    gap: clamp(0.25rem, 1vw, 1rem);
+  }
+  
+  .navbar-item a {
+    font-size: clamp(0.8rem, 0.9vw, 0.95rem);
+    padding: 0.4rem 0.6rem;
+  }
+  
+  .navbar-logo-texto {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .navbar-container {
+    padding: var(--espacamento-sm);
+  }
+  
+  .navbar-menu {
+    gap: 0.5rem;
+  }
+  
+  .navbar-item a {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.5rem;
   }
 }
 
@@ -242,6 +298,35 @@
     width: 100%;
     padding: var(--espacamento-sm);
     font-size: 1.125rem;
+  }
+  
+  /* Dropdown Mobile */
+  .navbar-dropdown {
+    width: 100%;
+  }
+  
+  .navbar-submenu {
+    position: static;
+    box-shadow: none;
+    background: var(--cinza-muito-claro);
+    margin-top: var(--espacamento-xs);
+    border-radius: var(--borda-arredondada-sm);
+    padding: var(--espacamento-xs);
+    border: none;
+  }
+  
+  .navbar-submenu::before,
+  .navbar-submenu::after {
+    display: none;
+  }
+  
+  .navbar-submenu a {
+    font-size: 1rem;
+    padding: var(--espacamento-xs) var(--espacamento-md);
+  }
+  
+  .navbar-submenu a:hover {
+    padding-left: var(--espacamento-md);
   }
 }
 
