@@ -55,10 +55,6 @@
     gap: var(--espacamento-xl);
   }
 
-  .carrossel-slide {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
   .banner-vertical {
     min-height: 250px;
   }
@@ -177,7 +173,15 @@
 
   /* Carrossel Devocionais Desktop */
   .carrossel-slides {
-    height: 500px;
+    min-height: 500px;
+  }
+
+  .carrossel-slide {
+    min-height: 500px;
+  }
+
+  .carrossel-tipo {
+    font-size: 2rem;
   }
 
   .carrossel-versiculo {
@@ -247,6 +251,10 @@
   }
 
   /* Carrossel */
+  .carrossel-tipo {
+    font-size: 2.25rem;
+  }
+
   .carrossel-versiculo {
     font-size: 2.25rem;
     max-width: 900px;
