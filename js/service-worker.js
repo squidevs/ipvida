@@ -19,7 +19,7 @@ const urlsParaCachear = [
   '/js/interface.js',
   '/js/api-integracao.js',
   '/assets/images/logo-preto.png',
-  '/assets/images/logo-braco.png',
+  '/assets/images/logo-branco.png',
   '/manifest.json'
 ];
 
