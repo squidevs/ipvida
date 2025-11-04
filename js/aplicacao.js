@@ -669,6 +669,99 @@ function localizacaoIgreja() {
   };
 }
 
+// Modal Visitante
+function modalVisitante() {
+  return {
+    modalAberto: false,
+    salvando: false,
+    mensagemSucesso: false,
+    visitante: {
+      nome: '',
+      dataVisita: '',
+      telefone: '',
+      mensagem: ''
+    },
+    dataMinima: '',
+    
+    init() {
+      console.log('🎯 Modal Visitante inicializado!');
+      // Define data mínima como hoje
+      const hoje = new Date();
+      this.dataMinima = hoje.toISOString().split('T')[0];
+    },
+    
+    abrirModal() {
+      console.log('🚀 Abrindo modal visitante...');
+      this.modalAberto = true;
+      this.mensagemSucesso = false;
+      // Limpar formulário
+      this.visitante = {
+        nome: '',
+        dataVisita: '',
+        telefone: '',
+        mensagem: ''
+      };
+    },
+    
+    fecharModal() {
+      this.modalAberto = false;
+    },
+    
+    async salvarVisitante() {
+      this.salvando = true;
+      
+      try {
+        const novoVisitante = {
+          id: Date.now(),
+          nome: this.visitante.nome,
+          dataVisita: this.visitante.dataVisita,
+          telefone: this.visitante.telefone || '',
+          mensagem: this.visitante.mensagem || '',
+          dataCadastro: new Date().toISOString(),
+          status: 'Confirmado'
+        };
+        
+        let visitantesLocal = JSON.parse(localStorage.getItem('ipv_visitantes') || '[]');
+        visitantesLocal.push(novoVisitante);
+        localStorage.setItem('ipv_visitantes', JSON.stringify(visitantesLocal));
+        
+        console.log('✅ Visitante salvo:', novoVisitante);
+        console.log('📊 Total:', visitantesLocal.length);
+        
+        this.mensagemSucesso = true;
+        
+        this.visitante = {
+          nome: '',
+          dataVisita: '',
+          telefone: '',
+          mensagem: ''
+        };
+        
+        setTimeout(() => {
+          this.fecharModal();
+          this.mensagemSucesso = false;
+        }, 3000);
+        
+      } catch (erro) {
+        console.error('❌ Erro:', erro);
+        alert('Erro ao salvar. Tente novamente.');
+      } finally {
+        this.salvando = false;
+      }
+    },
+    
+    formatarData(dataString) {
+      if (!dataString) return '';
+      const data = new Date(dataString + 'T00:00:00');
+      return data.toLocaleDateString('pt-BR', { 
+        day: '2-digit', 
+        month: 'long',
+        year: 'numeric'
+      });
+    }
+  };
+}
+
 // Copiar PIX
 async function copiarPix() {
   try {

@@ -420,20 +420,13 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: var(--z-modal-backdrop);
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: var(--espacamento-md);
-  opacity: 0;
-  visibility: hidden;
-  transition: var(--transicao-padrao);
-}
-
-.modal-overlay.ativo {
-  opacity: 1;
-  visibility: visible;
+  backdrop-filter: blur(3px);
 }
 
 .modal-conteudo {
@@ -443,21 +436,9 @@
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: var(--sombra-forte);
-  transform: translateY(50px);
-  transition: var(--transicao-padrao);
-}
-
-.modal-overlay.ativo .modal-conteudo {
-  transform: translateY(0);
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--espacamento-md);
-  border-bottom: 1px solid var(--cinza-leve);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  padding: 40px;
 }
 
 .modal-titulo {
@@ -498,6 +479,107 @@
   display: flex;
   justify-content: flex-end;
   gap: var(--espacamento-sm);
+}
+
+/* ==================== MODAL VISITANTE ==================== */
+.modal-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.modal-header h2 {
+  color: var(--verde-escuro);
+  margin: 15px 0 10px;
+  font-size: 1.8rem;
+}
+
+.modal-header p {
+  color: var(--cinza-medio);
+  font-size: 1rem;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-grupo label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: var(--peso-semibold);
+  color: var(--cinza-escuro);
+  font-size: 0.95rem;
+}
+
+.form-grupo label .material-icons {
+  font-size: 20px;
+  color: var(--verde-medio);
+}
+
+.form-grupo input,
+.form-grupo textarea {
+  padding: 12px 16px;
+  border: 2px solid var(--cinza-claro);
+  border-radius: var(--borda-arredondada);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: var(--transicao-rapida);
+}
+
+.form-grupo input:focus,
+.form-grupo textarea:focus {
+  outline: none;
+  border-color: var(--verde-medio);
+  box-shadow: 0 0 0 3px rgba(26, 71, 49, 0.1);
+}
+
+.form-grupo textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-acoes {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.modal-acoes button {
+  flex: 1;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: var(--peso-semibold);
+}
+
+.mensagem-sucesso {
+  background: linear-gradient(135deg, var(--verde-claro), var(--verde-medio));
+  color: var(--branco);
+  padding: 25px;
+  border-radius: var(--borda-arredondada);
+  text-align: center;
+  margin-top: 20px;
+}
+
+.mensagem-sucesso .material-icons {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.mensagem-sucesso p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.mensagem-sucesso strong {
+  font-size: 1.2rem;
 }
 
 /* Fim componentes.css */

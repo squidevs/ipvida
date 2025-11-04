@@ -57,6 +57,7 @@
             </span>
           </a>
           <ul class="navbar-submenu" x-show="dropdown" @click.away="dropdown = false" x-transition>
+            <li><a href="#" @click.prevent="$dispatch('abrir-modal-visitante'); fecharMenu(); dropdown = false">Quero visitar</a></li>
             <li><a href="#devocionais" @click="fecharMenu; dropdown = false">Devocionais</a></li>
             <li><a href="#videos" @click="fecharMenu; dropdown = false">Cultos</a></li>
             <li><a href="#programacao" @click="fecharMenu; dropdown = false">Programação</a></li>
@@ -91,11 +92,11 @@
       </p>
       
       <div class="hero-botoes">
-        <a href="#sobre" class="botao botao-primario botao-grande">
-          Conheça Nossa Igreja
-        </a>
-        <a href="#localizacao" class="botao botao-secundario botao-grande">
-          Como Chegar
+        <button @click="$dispatch('abrir-modal-visitante')" class="botao botao-primario botao-grande">
+          Quero visitar
+        </button>
+        <a href="#sobre" class="botao botao-secundario botao-grande">
+          Sobre Nós
         </a>
       </div><!-- hero-botoes !-->
     </div><!-- hero-conteudo !-->
@@ -672,8 +673,8 @@
           <h3>Conheça nossa igreja</h3>
           <p>
             <strong><span class="material-icons" style="vertical-align: middle; font-size: 1.1em;">location_on</span> Endereço:</strong><br>
-            <span x-text="dados.endereco?.logradouro + ', ' + dados.endereco?.numero"></span><br>
-            <span x-text="dados.endereco?.bairro"></span><br>
+            <span x-text="dados.endereco?.logradouro + ', ' + dados.endereco?.numero"></span>
+            <span x-text="dados.endereco?.bairro"></span>
             <span x-text="dados.endereco?.cidade + ' - ' + dados.endereco?.estado"></span><br>
             <span x-text="'CEP: ' + dados.endereco?.cep"></span>
           </p>
@@ -745,7 +746,7 @@
             <select id="assunto" class="formulario-select" x-model="dados.assunto" required>
               <option value="">Selecione...</option>
               <option value="duvida">Dúvida sobre a Igreja</option>
-              <option value="visita">Quero Visitar</option>
+              <option value="visita">Quero visitar</option>
               <option value="oracao">Pedido de Oração</option>
               <option value="batismo">Batismo</option>
               <option value="casamento">Casamento</option>
@@ -782,6 +783,7 @@
         <div class="footer-secao">
           <h4>Links Rápidos</h4>
           <ul class="footer-links">
+            <li><a href="#" @click.prevent="$dispatch('abrir-modal-visitante')">Quero visitar</a></li>
             <li><a href="#sobre">Sobre Nós</a></li>
             <li><a href="#devocionais">Devocionais</a></li>
             <li><a href="#programacao">Programação</a></li>
@@ -863,6 +865,99 @@
       <div vw-plugin-wrapper></div>
     </div>
   </div><!-- acessibilidade-container !-->
+  
+  <!-- ==================== MODAL VISITANTE ==================== -->
+  <div 
+    x-data="modalVisitante()" 
+    x-init="console.log('✅ Modal Visitante inicializado!')"
+    @abrir-modal-visitante.window="abrirModal()"
+    x-show="modalAberto" 
+    x-transition
+    class="modal-overlay"
+    @click.self="fecharModal()"
+    x-cloak>
+    
+    <div class="modal-conteudo" @click.stop>
+      <button @click="fecharModal()" class="modal-fechar">
+        <span class="material-icons">close</span>
+      </button>
+      
+      <div class="modal-header">
+        <span class="material-icons" style="font-size: 3rem; color: var(--verde-medio);">waving_hand</span>
+        <h2>Queremos te conhecer!</h2>
+        <p>Preencha os dados abaixo e aguardaremos você de braços abertos 🙏</p>
+      </div>
+      
+      <form @submit.prevent="salvarVisitante()" class="modal-form">
+        <div class="form-grupo">
+          <label for="nome-visitante">
+            <span class="material-icons">person</span>
+            Seu nome completo *
+          </label>
+          <input 
+            type="text" 
+            id="nome-visitante"
+            x-model="visitante.nome" 
+            placeholder="Ex: João da Silva"
+            required
+            minlength="3">
+        </div>
+        
+        <div class="form-grupo">
+          <label for="data-visita">
+            <span class="material-icons">calendar_today</span>
+            Quando pretende nos visitar? *
+          </label>
+          <input 
+            type="date" 
+            id="data-visita"
+            x-model="visitante.dataVisita" 
+            :min="dataMinima"
+            required>
+        </div>
+        
+        <div class="form-grupo">
+          <label for="telefone-visitante">
+            <span class="material-icons">phone</span>
+            Telefone (opcional)
+          </label>
+          <input 
+            type="tel" 
+            id="telefone-visitante"
+            x-model="visitante.telefone" 
+            placeholder="(00) 00000-0000">
+        </div>
+        
+        <div class="form-grupo">
+          <label for="mensagem-visitante">
+            <span class="material-icons">message</span>
+            Mensagem (opcional)
+          </label>
+          <textarea 
+            id="mensagem-visitante"
+            x-model="visitante.mensagem" 
+            placeholder="Conte-nos um pouco sobre você ou alguma dúvida..."
+            rows="3"></textarea>
+        </div>
+        
+        <div class="modal-acoes">
+          <button type="button" @click="fecharModal()" class="botao botao-secundario">
+            Cancelar
+          </button>
+          <button type="submit" class="botao botao-primario" :disabled="salvando">
+            <span x-show="!salvando">Confirmar Visita</span>
+            <span x-show="salvando">Salvando...</span>
+          </button>
+        </div>
+      </form>
+      
+      <div x-show="mensagemSucesso" x-transition class="mensagem-sucesso">
+        <span class="material-icons">check_circle</span>
+        <p><strong>Cadastro realizado com sucesso!</strong></p>
+        <p>Aguardamos você no dia <span x-text="formatarData(visitante.dataVisita)"></span></p>
+      </div>
+    </div>
+  </div>
   
   <!-- JavaScript -->
   <script src="js/data-manager.js"></script>
