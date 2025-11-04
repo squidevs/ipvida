@@ -121,40 +121,153 @@ function carrosselDevocionais() {
   };
 }
 
-// Vídeos YouTube
+// Vídeos YouTube e Live
 function videosYoutube() {
   return {
     videos: [],
+    live: null,
+    carregando: true,
     
     init() {
+      this.verificarLive();
       this.carregarVideos();
+      // Verificar live a cada 2 minutos
+      setInterval(() => this.verificarLive(), 120000);
+    },
+    
+    async verificarLive() {
+      try {
+        // Tenta buscar da API do YouTube
+        const statusLive = await verificarLiveYouTube();
+        this.live = statusLive;
+      } catch (erro) {
+        console.log('Usando dados mockados para live');
+        // Fallback: você pode simular se tem live ou não
+        this.live = { aoVivo: false };
+      }
     },
     
     async carregarVideos() {
-      // Vídeos exemplo (substituir com API do YouTube)
-      this.videos = [
-        {
-          id: 1,
-          titulo: 'Culto Dominical - Sermão',
-          descricao: 'Mensagem da Palavra de Deus',
-          thumbnail: 'assets/images/foto03.png',
-          url: 'https://youtube.com/@ipbvida'
-        },
-        {
-          id: 2,
-          titulo: 'Estudo Bíblico',
-          descricao: 'Aprofundando na Escritura',
-          thumbnail: 'assets/images/foto01.png',
-          url: 'https://youtube.com/@ipbvida'
-        },
-        {
-          id: 3,
-          titulo: 'Louvor e Adoração',
-          descricao: 'Momentos de culto',
-          thumbnail: 'assets/images/comunidade.png',
-          url: 'https://youtube.com/@ipbvida'
+      this.carregando = true;
+      try {
+        // Tenta buscar vídeos reais da API
+        const videosAPI = await buscarVideosYouTube(6);
+        
+        if (videosAPI && videosAPI.length > 0) {
+          this.videos = videosAPI;
+        } else {
+          // Fallback: Últimos 9 cultos da IPB Vida
+          this.videos = [
+            {
+              id: 'H3vpXaanS4Y',
+              titulo: 'Culto Dominical - IPB Vida',
+              descricao: 'Culto de adoração e pregação da Palavra de Deus',
+              thumbnail: 'https://i.ytimg.com/vi/H3vpXaanS4Y/hqdefault.jpg',
+              url: 'https://www.youtube.com/watch?v=H3vpXaanS4Y',
+              duracao: '1:45:23',
+              data: '2025-11-03'
+            },
+            {
+              id: 'Lp5FsNQx_k8',
+              titulo: 'Culto de Celebração - IPB Vida',
+              descricao: 'Momento de louvor e adoração ao Senhor',
+              thumbnail: 'https://i.ytimg.com/vi/Lp5FsNQx_k8/hqdefault.jpg',
+              url: 'https://www.youtube.com/watch?v=Lp5FsNQx_k8',
+              duracao: '1:38:15',
+              data: '2025-10-31'
+            },
+            {
+              id: 'LZphVnUPJfw',
+              titulo: 'Culto Vespertino - IPB Vida',
+              descricao: 'Culto vespertino com pregação expositiva',
+              thumbnail: 'https://i.ytimg.com/vi/LZphVnUPJfw/hqdefault.jpg',
+              url: 'https://www.youtube.com/watch?v=LZphVnUPJfw',
+              duracao: '1:52:40',
+              data: '2025-10-27'
+            },
+            {
+              id: 'ZtA8lBgmZlA',
+              titulo: 'Culto Dominical Matutino - IPB Vida',
+              descricao: 'Culto matutino de domingo com a família IPB Vida',
+              thumbnail: 'https://i.ytimg.com/vi/ZtA8lBgmZlA/hqdefault.jpg',
+              url: 'https://www.youtube.com/watch?v=ZtA8lBgmZlA',
+              duracao: '1:43:55',
+              data: '2025-10-24'
+            },
+            {
+              id: 'W5tBcSnUJhU',
+              titulo: 'Culto de Domingo - IPB Vida',
+              descricao: 'Celebração dominical com adoração e ensino bíblico',
+              thumbnail: 'https://i.ytimg.com/vi/W5tBcSnUJhU/hqdefault.jpg',
+              url: 'https://www.youtube.com/watch?v=W5tBcSnUJhU',
+              duracao: '1:41:20',
+              data: '2025-10-20'
+            },
+            {
+              id: 'yZtjpruaTFc',
+              titulo: 'Culto de Adoração - IPB Vida',
+              descricao: 'Momento de adoração e reflexão na Palavra',
+              thumbnail: 'https://i.ytimg.com/vi/yZtjpruaTFc/hqdefault.jpg',
+              url: 'https://www.youtube.com/watch?v=yZtjpruaTFc',
+              duracao: '1:47:30',
+              data: '2025-10-17'
+            },
+            {
+              id: 'RrK6MACslgU',
+              titulo: 'Culto Solene - IPB Vida',
+              descricao: 'Culto especial de celebração e gratidão',
+              thumbnail: 'https://i.ytimg.com/vi/RrK6MACslgU/hqdefault.jpg',
+              url: 'https://www.youtube.com/watch?v=RrK6MACslgU',
+              duracao: '1:39:45',
+              data: '2025-10-13'
+            },
+            {
+              id: 'fMykvWJBB0c',
+              titulo: 'Culto Dominical - Pregação da Palavra',
+              descricao: 'Culto com pregação expositiva das Escrituras',
+              thumbnail: 'https://i.ytimg.com/vi/fMykvWJBB0c/hqdefault.jpg',
+              url: 'https://www.youtube.com/watch?v=fMykvWJBB0c',
+              duracao: '1:44:10',
+              data: '2025-10-10'
+            },
+            {
+              id: '32gwoMw7d0s',
+              titulo: 'Culto de Louvor e Pregação',
+              descricao: 'Culto com louvor congregacional e mensagem bíblica',
+              thumbnail: 'https://i.ytimg.com/vi/32gwoMw7d0s/hqdefault.jpg',
+              url: 'https://www.youtube.com/watch?v=32gwoMw7d0s',
+              duracao: '1:50:25',
+              data: '2025-10-06'
+            }
+          ];
         }
-      ];
+      } catch (erro) {
+        console.error('Erro ao carregar vídeos:', erro);
+      } finally {
+        this.carregando = false;
+      }
+    },
+    
+    inscreverCanal() {
+      window.open('https://youtube.com/@ipbvida?sub_confirmation=1', '_blank');
+    },
+    
+    assistirAoVivo() {
+      if (this.live && this.live.aoVivo) {
+        window.open(this.live.url, '_blank');
+      } else {
+        alert('Não há transmissão ao vivo no momento. Inscreva-se para ser notificado!');
+      }
+    },
+    
+    formatarData(dataString) {
+      if (!dataString) return '';
+      const data = new Date(dataString + 'T00:00:00');
+      return data.toLocaleDateString('pt-BR', { 
+        day: '2-digit', 
+        month: 'short',
+        year: 'numeric'
+      });
     }
   };
 }
@@ -176,81 +289,115 @@ function programacaoIgreja() {
       this.programas = [
         {
           id: 1,
-          titulo: 'Proteção de Dados na Igreja e nos Concílios',
-          dia: '16',
-          mes: 'out',
+          titulo: 'Culto de Celebração e Adoração',
+          dia: '10',
+          mes: 'nov',
           horario: '19h30',
           local: 'Templo Principal',
-          categoria: 'DESTAQUES',
+          categoria: 'CULTOS',
           corCategoria: '#1A4731',
           link: '#',
           cor1: '#1A4731',
-          cor2: '#2D5F4A'
+          cor2: '#2D5F4A',
+          imagem: 'assets/images/programacao/culto.svg'
         },
         {
           id: 2,
-          titulo: 'A Reforma Protestante do Século XVI',
+          titulo: 'Escola Bíblica Dominical',
           dia: '10',
-          mes: 'out',
-          horario: '20h00',
-          local: 'Auditório',
-          categoria: 'ÚLTIMAS',
+          mes: 'nov',
+          horario: '09h00',
+          local: 'Salas de Aula',
+          categoria: 'ENSINO',
           corCategoria: '#2C3E50',
           link: '#',
           cor1: '#2C3E50',
-          cor2: '#34495E'
+          cor2: '#34495E',
+          imagem: 'assets/images/programacao/ebd.svg'
         },
         {
           id: 3,
-          titulo: 'Outubro Rosa - Cuidado da Mulher',
-          dia: '02',
-          mes: 'out',
-          horario: '15h00',
-          local: 'Salão de Eventos',
-          categoria: 'INFORMATIVOS',
+          titulo: 'Reunião de Oração',
+          dia: '13',
+          mes: 'nov',
+          horario: '20h00',
+          local: 'Templo',
+          categoria: 'ORAÇÃO',
           corCategoria: '#8B3A62',
           link: '#',
           cor1: '#8B3A62',
-          cor2: '#A94976'
+          cor2: '#A94976',
+          imagem: 'assets/images/programacao/oracao.svg'
         },
         {
           id: 4,
-          titulo: 'Mês da Reforma Protestante',
-          dia: '01',
-          mes: 'out',
-          horario: 'Todo o mês',
-          local: 'Diversos locais',
-          categoria: 'ARTIGOS',
+          titulo: 'Estudo Bíblico de Quarta',
+          dia: '13',
+          mes: 'nov',
+          horario: '19h30',
+          local: 'Salão',
+          categoria: 'ESTUDO',
           corCategoria: '#D4AF37',
           link: '#',
           cor1: '#D4AF37',
-          cor2: '#C9A352'
+          cor2: '#C9A352',
+          imagem: 'assets/images/programacao/estudo.svg'
         },
         {
           id: 5,
-          titulo: 'Primeira Edição do Congresso APECOM',
-          dia: '25',
-          mes: 'set',
-          horario: '09h00',
-          local: 'Gravatá-PE',
-          categoria: 'BRASIL PRESBITERIANO',
+          titulo: 'Culto de Jovens e Adolescentes',
+          dia: '15',
+          mes: 'nov',
+          horario: '19h00',
+          local: 'Salão Jovem',
+          categoria: 'JOVENS',
           corCategoria: '#3498DB',
           link: '#',
           cor1: '#3498DB',
-          cor2: '#5DADE2'
+          cor2: '#5DADE2',
+          imagem: 'assets/images/programacao/jovens.svg'
         },
         {
           id: 6,
-          titulo: 'UPHs em Ação',
-          dia: '22',
-          mes: 'set',
-          horario: 'Diversos horários',
-          local: 'Todo o Brasil',
-          categoria: 'NOTÍCIAS',
+          titulo: 'Ministério Infantil',
+          dia: '10',
+          mes: 'nov',
+          horario: '10h00',
+          local: 'Sala Infantil',
+          categoria: 'CRIANÇAS',
           corCategoria: '#E74C3C',
           link: '#',
           cor1: '#E74C3C',
-          cor2: '#EC7063'
+          cor2: '#EC7063',
+          imagem: 'assets/images/programacao/infantil.svg'
+        },
+        {
+          id: 7,
+          titulo: 'Grupo de Casais',
+          dia: '16',
+          mes: 'nov',
+          horario: '20h00',
+          local: 'Residência',
+          categoria: 'GRUPOS',
+          corCategoria: '#16A085',
+          link: '#',
+          cor1: '#16A085',
+          cor2: '#1ABC9C',
+          imagem: 'assets/images/programacao/casais.svg'
+        },
+        {
+          id: 8,
+          titulo: 'Ação Social Comunitária',
+          dia: '17',
+          mes: 'nov',
+          horario: '14h00',
+          local: 'Comunidade',
+          categoria: 'MISSÕES',
+          corCategoria: '#9B59B6',
+          link: '#',
+          cor1: '#9B59B6',
+          cor2: '#8E44AD',
+          imagem: 'assets/images/programacao/social.svg'
         }
       ];
     },
@@ -357,6 +504,39 @@ function formularioContato() {
         assunto: '',
         mensagem: ''
       };
+    }
+  };
+}
+
+// Notícias IPB
+function noticiasIPB() {
+  return {
+    noticias: [],
+    carregando: true,
+    
+    init() {
+      this.carregarNoticias();
+    },
+    
+    async carregarNoticias() {
+      this.carregando = true;
+      try {
+        const noticiasAPI = await buscarNoticiasIPB();
+        this.noticias = noticiasAPI;
+      } catch (erro) {
+        console.error('Erro ao carregar notícias:', erro);
+      } finally {
+        this.carregando = false;
+      }
+    },
+    
+    formatarData(dataString) {
+      const data = new Date(dataString);
+      return data.toLocaleDateString('pt-BR', { 
+        day: '2-digit', 
+        month: 'long',
+        year: 'numeric'
+      });
     }
   };
 }

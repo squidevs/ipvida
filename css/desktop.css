@@ -32,6 +32,23 @@
     font-size: 1.75rem;
   }
 
+  /* Vídeos */
+  .videos-acoes {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--espacamento-lg);
+  }
+
+  .videos-acoes .botao {
+    flex: 0 1 auto;
+    min-width: 280px;
+  }
+
+  /* Notícias */
+  .noticias-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   /* Programação */
   .programacao-grid {
     grid-template-columns: 1fr 1fr;
@@ -149,6 +166,15 @@
     font-size: 1.25rem;
   }
 
+  /* Notícias Desktop */
+  .noticias-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .noticia-imagem-container {
+    height: 220px;
+  }
+
   /* Carrossel Devocionais Desktop */
   .carrossel-slides {
     height: 500px;
@@ -170,8 +196,8 @@
 
   /* Contribuições Desktop */
   .qrcode-imagem {
-    width: 300px;
-    height: 300px;
+    width: 220px;
+    height: 220px;
   }
 
   /* Localização Desktop */

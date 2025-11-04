@@ -53,7 +53,7 @@
             <li><a href="#devocionais" @click="fecharMenu; dropdown = false">Devocionais</a></li>
             <li><a href="#videos" @click="fecharMenu; dropdown = false">Cultos</a></li>
             <li><a href="#programacao" @click="fecharMenu; dropdown = false">Programação</a></li>
-            <li><a href="#eventos" @click="fecharMenu; dropdown = false">Eventos</a></li>
+            <li><a href="#noticias-ipb" @click="fecharMenu; dropdown = false">Notícias IPB</a></li>
             <li><a href="#cremos" @click="fecharMenu; dropdown = false">O Que Cremos</a></li>
           </ul>
         </li><!-- navbar-dropdown !-->
@@ -201,17 +201,48 @@
   
   <!-- ==================== VÍDEOS / CULTOS ==================== -->
   <section id="videos" class="secao">
-    <div class="container">
+    <div class="container" x-data="videosYoutube()">
       <h2 class="secao-titulo">Nossos Cultos</h2>
       <p class="secao-subtitulo">
         Assista aos cultos e estudos bíblicos em nosso canal do YouTube
       </p>
       
-      <div class="grid grid-3" x-data="videosYoutube()">
+      <!-- Botões de Ação -->
+      <div class="videos-acoes">
+        <button 
+          @click="assistirAoVivo()" 
+          class="botao botao-grande"
+          :class="live && live.aoVivo ? 'botao-live' : 'botao-secundario'"
+        >
+          <span class="material-icons" style="vertical-align: middle;">
+            <span x-text="live && live.aoVivo ? 'sensors' : 'videocam_off'"></span>
+          </span>
+          <span x-text="live && live.aoVivo ? '🔴 AO VIVO AGORA' : 'Nenhuma transmissão ao vivo'"></span>
+        </button>
+        
+        <button @click="inscreverCanal()" class="botao botao-primario botao-grande">
+          <span class="material-icons" style="vertical-align: middle;">notifications_active</span>
+          Inscrever-se no Canal
+        </button>
+      </div>
+      
+      <!-- Grade de Vídeos -->
+      <div class="grid grid-3">
+        <template x-show="carregando">
+          <div class="loading-spinner">Carregando vídeos...</div>
+        </template>
+        
         <template x-for="video in videos" :key="video.id">
-          <div class="card hover-lift">
-            <img :src="video.thumbnail" :alt="video.titulo" class="card-imagem">
+          <div class="card hover-lift video-card">
+            <div class="video-thumbnail-container">
+              <img :src="video.thumbnail" :alt="video.titulo" class="card-imagem">
+              <span class="video-duracao" x-show="video.duracao" x-text="video.duracao"></span>
+            </div>
             <div class="card-corpo">
+              <div class="video-meta" x-show="video.data">
+                <span class="material-icons">event</span>
+                <span x-text="formatarData(video.data)"></span>
+              </div>
               <h4 class="card-titulo" x-text="video.titulo"></h4>
               <p class="card-texto" x-text="video.descricao"></p>
               <a :href="video.url" target="_blank" class="botao botao-primario" style="margin-top: auto;">
@@ -224,6 +255,7 @@
       
       <div class="text-center mt-4">
         <a href="https://youtube.com/@ipbvida" target="_blank" class="botao botao-secundario botao-grande">
+          <span class="material-icons" style="vertical-align: middle;">video_library</span>
           Ver Todos os Vídeos
         </a>
       </div>
@@ -246,13 +278,14 @@
               <div class="carrossel-slide" x-show="slideAtual === index" x-transition>
                 <template x-for="banner in grupo" :key="banner.id">
                   <div class="banner-vertical">
-                    <div class="banner-conteudo" :style="`background: linear-gradient(135deg, ${banner.cor1}, ${banner.cor2})`">
+                    <div class="banner-conteudo">
+                      <div class="banner-imagem" :style="`background-image: url('${banner.imagem}');`"></div>
+                      <div class="banner-overlay" :style="`background: linear-gradient(135deg, ${banner.cor1}dd, ${banner.cor2}dd);`"></div>
                       <div class="banner-data-badge">
                         <div class="badge-dia" x-text="banner.dia"></div>
                         <div class="badge-mes" x-text="banner.mes"></div>
                       </div>
                       <h3 class="banner-titulo" x-text="banner.titulo"></h3>
-                      <p class="banner-subtitulo" x-text="banner.subtitulo"></p>
                       <div class="banner-info">
                         <span class="material-icons">schedule</span>
                         <span x-text="banner.horario"></span>
@@ -318,28 +351,46 @@
     </div><!-- container !-->
   </section><!-- programacao !-->
   
-  <!-- ==================== EVENTOS ==================== -->
-  <section id="eventos" class="secao" style="background: var(--cinza-muito-claro);">
-    <div class="container">
-      <h2 class="secao-titulo">Próximos Eventos</h2>
+  <!-- ==================== NOTÍCIAS IPB ==================== -->
+  <section id="noticias-ipb" class="secao" style="background: var(--cinza-muito-claro);">
+    <div class="container" x-data="noticiasIPB()">
+      <h2 class="secao-titulo">Notícias da IPB</h2>
       <p class="secao-subtitulo">
-        Participe das atividades e eventos da nossa igreja
+        Fique por dentro das últimas notícias da Igreja Presbiteriana do Brasil
       </p>
       
-      <div class="eventos-container" x-data="eventosIgreja()">
-        <template x-for="evento in eventos" :key="evento.id">
-          <div class="evento-card">
-            <img :src="evento.imagem" :alt="evento.titulo" class="evento-imagem">
-            <div class="evento-conteudo">
-              <span class="evento-data" x-text="formatarData(evento.data)"></span>
-              <h3 class="evento-titulo" x-text="evento.titulo"></h3>
-              <p class="evento-descricao" x-text="evento.descricao"></p>
-            </div><!-- evento-conteudo !-->
-          </div><!-- evento-card !-->
+      <div class="noticias-grid">
+        <template x-show="carregando">
+          <div class="loading-spinner">Carregando notícias...</div>
         </template>
-      </div><!-- eventos-container !-->
+        
+        <template x-for="noticia in noticias" :key="noticia.id">
+          <a :href="noticia.link" target="_blank" class="noticia-card">
+            <div class="noticia-imagem-container">
+              <img :src="noticia.imagem" :alt="noticia.titulo" class="noticia-imagem">
+              <span class="noticia-categoria" x-text="noticia.categoria"></span>
+            </div>
+            <div class="noticia-conteudo">
+              <span class="noticia-data" x-text="formatarData(noticia.dataPublicacao)"></span>
+              <h3 class="noticia-titulo" x-text="noticia.titulo"></h3>
+              <p class="noticia-descricao" x-text="noticia.descricao"></p>
+              <div class="noticia-link-wrapper">
+                <span class="noticia-link-texto">Ler mais</span>
+                <span class="material-icons">arrow_forward</span>
+              </div>
+            </div>
+          </a>
+        </template>
+      </div><!-- noticias-grid !-->
+      
+      <div class="text-center mt-4">
+        <a href="https://ipb.org.br" target="_blank" class="botao botao-secundario botao-grande">
+          <span class="material-icons" style="vertical-align: middle;">language</span>
+          Visitar Site da IPB
+        </a>
+      </div>
     </div><!-- container !-->
-  </section><!-- eventos !-->
+  </section><!-- noticias-ipb !-->
   
   <!-- ==================== 5 PONTOS DO CALVINISMO ==================== -->
   <section id="calvinismo" class="secao">
@@ -568,7 +619,7 @@
       
       <div class="contribuicoes-content">
         <div class="qrcode-container">
-          <h3 style="margin-bottom: var(--espacamento-md);">PIX QR Code</h3>
+          <h5 style="margin-bottom: var(--espacamento-md);">PIX QR Code</h5>
           <img src="assets/images/pix.png" alt="QR Code PIX" class="qrcode-imagem">
           <p style="margin-top: var(--espacamento-sm); color: var(--cinza-medio);">
             Escaneie o QR Code acima com seu app bancário
@@ -724,7 +775,7 @@
           <ul class="footer-links">
             <li><a href="#sobre">Sobre Nós</a></li>
             <li><a href="#devocionais">Devocionais</a></li>
-            <li><a href="#eventos">Eventos</a></li>
+            <li><a href="#programacao">Programação</a></li>
             <li><a href="paginas/confissao-fe.html">Confissão de Fé</a></li>
             <li><a href="#contribuicoes">Contribuir</a></li>
           </ul>

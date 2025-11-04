@@ -24,6 +24,7 @@ html {
   --verde-escuro: #1A4731;
   --verde-medio: #2D6A4F;
   --verde-claro: #52B788;
+  --verde-muito-claro: #D8F3DC;
   --dourado: #D4AF37;
   --dourado-hover: #c49f2e;
   
@@ -46,8 +47,10 @@ html {
   --fonte-secundaria: 'Roboto', Arial, sans-serif;
   --peso-leve: 300;
   --peso-normal: 400;
-  --peso-medio: 600;
+  --peso-medio: 500;
+  --peso-semi-negrito: 600;
   --peso-bold: 700;
+  --peso-negrito: 700;
   --peso-black: 900;
   
   /* Espaçamentos */
