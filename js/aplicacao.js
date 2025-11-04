@@ -217,11 +217,21 @@ function videosYoutube() {
     async carregarVideos() {
       this.carregando = true;
       try {
-        // Tenta buscar vídeos reais da API
+        // Primeiro tenta carregar do JSON
+        const dadosJSON = await dataManager.carregarVideos();
+        if (dadosJSON && dadosJSON.videos) {
+          this.videos = dadosJSON.videos;
+          console.log('✅ Vídeos carregados do JSON');
+          this.carregando = false;
+          return;
+        }
+        
+        // Tenta buscar vídeos reais da API YouTube
         const videosAPI = await buscarVideosYouTube(6);
         
         if (videosAPI && videosAPI.length > 0) {
           this.videos = videosAPI;
+          console.log('✅ Vídeos carregados da API YouTube');
         } else {
           // Fallback: Últimos 9 cultos da IPB Vida
             this.videos = [
@@ -355,13 +365,26 @@ function videosYoutube() {
         programas: [],
         gruposBanners: [],
         
-        init() {
-      this.carregarProgramacao();
+        async init() {
+      await this.carregarProgramacao();
       this.agruparBanners();
       this.iniciarAutoPlay();
     },
     
-    carregarProgramacao() {
+    async carregarProgramacao() {
+      // Tenta carregar do JSON primeiro
+      const dadosJSON = await dataManager.carregarProgramacao();
+      if (dadosJSON && dadosJSON.programas) {
+        this.programas = dadosJSON.programas;
+        console.log('✅ Programação carregada do JSON:', this.programas);
+        console.log('🖼️ Imagens dos programas:');
+        this.programas.forEach((p, i) => {
+          console.log(`   ${i+1}. ${p.titulo}: ${p.imagem}`);
+        });
+        return;
+      }
+      
+      // Fallback: dados hardcoded
       this.programas = [
         {
           id: 1,
@@ -486,7 +509,16 @@ function eventosIgreja() {
       this.carregarEventos();
     },
     
-    carregarEventos() {
+    async carregarEventos() {
+      // Tenta carregar do JSON primeiro
+      const dadosJSON = await dataManager.carregarProgramacao();
+      if (dadosJSON && dadosJSON.eventos) {
+        this.eventos = dadosJSON.eventos;
+        console.log('✅ Eventos carregados do JSON');
+        return;
+      }
+      
+      // Fallback: dados hardcoded
       this.eventos = [
         {
           id: 1,
@@ -591,15 +623,67 @@ function noticiasIPB() {
   };
 }
 
+// Contribuições
+function contribuicoesIgreja() {
+  return {
+    dados: {},
+    
+    async init() {
+      const dadosBancarios = await dataManager.carregarDadosBancarios();
+      if (dadosBancarios) {
+        this.dados = dadosBancarios;
+        console.log('✅ Dados bancários carregados do JSON');
+      }
+    },
+    
+    async copiarChavePix() {
+      const chavePix = this.dados?.pix?.chave || '00.000.000/0001-00';
+      
+      try {
+        if (navigator.clipboard) {
+          await navigator.clipboard.writeText(chavePix);
+          alert('Chave PIX copiada para a área de transferência!');
+        } else {
+          alert('Chave PIX: ' + chavePix);
+        }
+      } catch (erro) {
+        console.error('Erro ao copiar PIX:', erro);
+        alert('Chave PIX: ' + chavePix);
+      }
+    }
+  };
+}
+
+// Localização da Igreja
+function localizacaoIgreja() {
+  return {
+    dados: {},
+    
+    async init() {
+      const dadosIgreja = await dataManager.carregarDadosIgreja();
+      if (dadosIgreja) {
+        this.dados = dadosIgreja;
+        console.log('✅ Dados da igreja carregados do JSON');
+      }
+    }
+  };
+}
+
 // Copiar PIX
-function copiarPix() {
-  const chavePix = '00.000.000/0001-00';
-  
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(chavePix).then(() => {
-      alert('Chave PIX copiada para a área de transferência!');
-    });
-  } else {
-    alert('Chave PIX: ' + chavePix);
+async function copiarPix() {
+  try {
+    const dadosBancarios = await dataManager.carregarDadosBancarios();
+    const chavePix = dadosBancarios?.pix?.chave || '00.000.000/0001-00';
+    
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(chavePix).then(() => {
+        alert('Chave PIX copiada para a área de transferência!');
+      });
+    } else {
+      alert('Chave PIX: ' + chavePix);
+    }
+  } catch (erro) {
+    console.error('Erro ao copiar PIX:', erro);
+    alert('Erro ao copiar chave PIX');
   }
 }

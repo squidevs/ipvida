@@ -532,16 +532,13 @@
 .card-programacao-imagem-full {
   position: relative;
   height: 550px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--espacamento-xl);
+  overflow: hidden;
 }
 
 .programacao-icone-grande {
-  width: 180px;
-  height: 180px;
-  filter: brightness(0) invert(1);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   opacity: 0.95;
   transition: var(--transicao-padrao);
 }

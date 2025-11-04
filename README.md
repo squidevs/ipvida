@@ -63,7 +63,18 @@ ipvida/
 │   ├── animacoes.css    # Transições e keyframes
 │   ├── mobile.css       # Estilos mobile-first
 │   └── desktop.css      # Media queries desktop
+├── data/                # 🆕 Dados JSON do site
+│   ├── devocionais.json      # Versículos, salmos, provérbios
+│   ├── videos.json           # Lista de vídeos do YouTube
+│   ├── programacao.json      # Cultos e eventos
+│   ├── dados-igreja.json     # Endereço, contato, horários
+│   ├── dados-bancarios.json  # PIX e conta bancária
+│   ├── redes-sociais.json    # Links das redes sociais
+│   ├── README.md             # Documentação dos JSONs
+│   ├── GUIA-RAPIDO.md        # Guia de edição rápida
+│   └── TEMPLATES.md          # Templates para copiar
 ├── js/
+│   ├── data-manager.js  # 🆕 Gerenciador de dados JSON
 │   ├── aplicacao.js     # Lógica principal Alpine.js
 │   ├── api-integracao.js # APIs externas
 │   ├── acessibilidade.js # Recursos acessibilidade
@@ -89,6 +100,23 @@ cd ipvida
 2. Abra com um servidor local (ex: Live Server no VS Code)
 
 3. Acesse: `http://localhost:5500`
+
+### 📝 Editando Conteúdo
+
+**Todos os dados do site estão em arquivos JSON na pasta `data/`**
+
+Para atualizar o conteúdo do site:
+1. Navegue até a pasta `data/`
+2. Edite o arquivo JSON correspondente
+3. Consulte o `data/GUIA-RAPIDO.md` para instruções detalhadas
+4. Use os templates em `data/TEMPLATES.md`
+
+**Principais arquivos:**
+- `dados-igreja.json` - Endereço, telefone, horários
+- `dados-bancarios.json` - PIX e conta bancária
+- `videos.json` - Vídeos do YouTube
+- `programacao.json` - Cultos e eventos
+- `redes-sociais.json` - Links das redes sociais
 
 ### Deploy
 

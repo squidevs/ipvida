@@ -61,12 +61,12 @@
 
   .card-programacao-imagem-full {
     height: 650px;
-    padding: var(--espacamento-xxl);
   }
 
   .programacao-icone-grande {
-    width: 220px;
-    height: 220px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .carrossel-seta-prog {

@@ -1,0 +1,98 @@
+{
+  "versiculosDia": [
+    {
+      "id": 1,
+      "texto": "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.",
+      "referencia": "João 3:16",
+      "livro": "john",
+      "capitulo": 3,
+      "versiculo": 16
+    },
+    {
+      "id": 2,
+      "texto": "Posso todas as coisas naquele que me fortalece.",
+      "referencia": "Filipenses 4:13",
+      "livro": "philippians",
+      "capitulo": 4,
+      "versiculo": 13
+    },
+    {
+      "id": 3,
+      "texto": "Entrega o teu caminho ao Senhor; confia nele, e ele tudo fará.",
+      "referencia": "Salmos 37:5",
+      "livro": "psalms",
+      "capitulo": 37,
+      "versiculo": 5
+    },
+    {
+      "id": 4,
+      "texto": "Confie no Senhor de todo o seu coração e não se apoie em seu próprio entendimento.",
+      "referencia": "Provérbios 3:5",
+      "livro": "proverbs",
+      "capitulo": 3,
+      "versiculo": 5
+    },
+    {
+      "id": 5,
+      "texto": "O Senhor é o meu pastor; nada me faltará.",
+      "referencia": "Salmos 23:1",
+      "livro": "psalms",
+      "capitulo": 23,
+      "versiculo": 1
+    },
+    {
+      "id": 6,
+      "texto": "Buscai primeiro o reino de Deus, e a sua justiça, e todas estas coisas vos serão acrescentadas.",
+      "referencia": "Mateus 6:33",
+      "livro": "matthew",
+      "capitulo": 6,
+      "versiculo": 33
+    },
+    {
+      "id": 7,
+      "texto": "Porque onde estiverem dois ou três reunidos em meu nome, aí estou eu no meio deles.",
+      "referencia": "Mateus 18:20",
+      "livro": "matthew",
+      "capitulo": 18,
+      "versiculo": 20
+    },
+    {
+      "id": 8,
+      "texto": "E conhecereis a verdade, e a verdade vos libertará.",
+      "referencia": "João 8:32",
+      "livro": "john",
+      "capitulo": 8,
+      "versiculo": 32
+    },
+    {
+      "id": 9,
+      "texto": "Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus; eu te fortaleço, e te ajudo.",
+      "referencia": "Isaías 41:10",
+      "livro": "isaiah",
+      "capitulo": 41,
+      "versiculo": 10
+    },
+    {
+      "id": 10,
+      "texto": "Alegrai-vos sempre no Senhor; outra vez digo, alegrai-vos.",
+      "referencia": "Filipenses 4:4",
+      "livro": "philippians",
+      "capitulo": 4,
+      "versiculo": 4
+    }
+  ],
+  "salmos": {
+    "quantidade": 150,
+    "mensagemFallback": {
+      "texto": "O Senhor é o meu pastor; nada me faltará.",
+      "referencia": "Salmos 23:1"
+    }
+  },
+  "proverbios": {
+    "quantidade": 31,
+    "mensagemFallback": {
+      "texto": "Confia no Senhor de todo o teu coração e não te estribes no teu próprio entendimento.",
+      "referencia": "Provérbios 3:5"
+    }
+  }
+}

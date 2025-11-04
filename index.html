@@ -316,7 +316,11 @@
           <h3 class="lista-titulo">Todas as Programações</h3>
           <div class="lista-scroll">
             <template x-for="(programa, index) in programas" :key="programa.id">
-              <a :href="programa.link" class="programa-item" :class="{ 'destaque': slideAtual === index && index < 6 }">
+              <div 
+                @click="slideAtual = index < 6 ? index : slideAtual" 
+                class="programa-item" 
+                :class="{ 'destaque': slideAtual === index && index < 6 }"
+                :style="index < 6 ? 'cursor: pointer;' : ''">
                 <div class="programa-data-badge">
                   <div class="badge-dia" x-text="programa.dia"></div>
                   <div class="badge-mes" x-text="programa.mes"></div>
@@ -332,8 +336,8 @@
                   </p>
                   <span class="programa-categoria" :style="`background: ${programa.corCategoria}`" x-text="programa.categoria"></span>
                 </div>
-                <span class="material-icons programa-seta">chevron_right</span>
-              </a>
+                <span class="material-icons programa-seta" x-show="index < 6">chevron_right</span>
+              </div>
             </template>
           </div>
         </div>
@@ -616,33 +620,33 @@
   </section><!-- cremos !-->
   
   <!-- ==================== CONTRIBUIÇÕES ==================== -->
-  <section id="contribuicoes" class="secao">
+  <section id="contribuicoes" class="secao" x-data="contribuicoesIgreja()" x-init="init()">
     <div class="container">
       <h2 class="secao-titulo">Contribuições</h2>
-      <p class="secao-subtitulo">
+      <p class="secao-subtitulo" x-text="dados.informacoes?.mensagem">
         Sua contribuição ajuda a manter e expandir a obra de Deus
       </p>
       
       <div class="contribuicoes-content">
         <div class="qrcode-container">
           <h5 style="margin-bottom: var(--espacamento-md);">PIX QR Code</h5>
-          <img src="assets/images/pix.png" alt="QR Code PIX" class="qrcode-imagem">
-          <p style="margin-top: var(--espacamento-sm); color: var(--cinza-medio);">
+          <img :src="dados.qrcode?.imagemUrl || 'assets/images/pix.png'" alt="QR Code PIX" class="qrcode-imagem">
+          <p style="margin-top: var(--espacamento-sm); color: var(--cinza-medio);" x-text="dados.qrcode?.instrucoes">
             Escaneie o QR Code acima com seu app bancário
           </p>
         </div><!-- qrcode-container !-->
         
         <div class="dados-bancarios">
           <h3>Dados Bancários</h3>
-          <p><strong>Igreja Presbiteriana Vida</strong></p>
-          <p><strong>CNPJ:</strong> 00.000.000/0001-00</p>
-          <p><strong>Banco:</strong> Bradesco (237)</p>
-          <p><strong>Agência:</strong> 0000-0</p>
-          <p><strong>Conta Corrente:</strong> 00000-0</p>
-          <p><strong>PIX (CNPJ):</strong> 00.000.000/0001-00</p>
+          <p><strong x-text="dados.contaBancaria?.favorecido">Igreja Presbiteriana Vida</strong></p>
+          <p><strong>CNPJ:</strong> <span x-text="dados.contaBancaria?.cnpj">00.000.000/0001-00</span></p>
+          <p><strong>Banco:</strong> <span x-text="dados.contaBancaria?.banco?.nome + ' (' + dados.contaBancaria?.banco?.codigo + ')'">Banco do Brasil (001)</span></p>
+          <p><strong>Agência:</strong> <span x-text="dados.contaBancaria?.agencia">0000-0</span></p>
+          <p><strong>Conta Corrente:</strong> <span x-text="dados.contaBancaria?.conta">00000-0</span></p>
+          <p><strong>PIX (<span x-text="dados.pix?.tipo">CNPJ</span>):</strong> <span x-text="dados.pix?.chave">00.000.000/0001-00</span></p>
           
           <div class="mt-3">
-            <button class="botao botao-secundario" @click="copiarPix()">
+            <button class="botao botao-secundario" @click="copiarChavePix()">
               <span class="material-icons" style="vertical-align: middle;">content_copy</span> Copiar Chave PIX
             </button>
           </div>
@@ -652,7 +656,7 @@
   </section><!-- contribuicoes !-->
   
   <!-- ==================== LOCALIZAÇÃO ==================== -->
-  <section id="localizacao" class="secao" style="background: var(--cinza-muito-claro);">
+  <section id="localizacao" class="secao" style="background: var(--cinza-muito-claro);" x-data="localizacaoIgreja()" x-init="init()">
     <div class="container">
       <h2 class="secao-titulo">Localização</h2>
       <p class="secao-subtitulo">
@@ -661,46 +665,50 @@
       
       <div class="localizacao-content">
         <div class="mapa-container">
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d229.63039820932624!2d-47.159194!3d-22.947046!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8b7beca27d1e1%3A0x782b1183a25ff854!2sComunidade%20Viver%20-%20Residencial%20Cosmos!5e0!3m2!1spt-BR!2sbr!4v1762275962246!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe :src="dados.localizacao?.googleMapsEmbed" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div><!-- mapa-container !-->
         
         <div class="info-localizacao">
           <h3>Conheça nossa igreja</h3>
           <p>
-        <strong><span class="material-icons" style="vertical-align: middle; font-size: 1.1em;">location_on</span> Endereço:</strong><br>
-        R. Rozalindo de Souza, 08<br>
-        Res. Cosmos<br>
-        Campinas - SP<br>CEP: 13059-582
+            <strong><span class="material-icons" style="vertical-align: middle; font-size: 1.1em;">location_on</span> Endereço:</strong><br>
+            <span x-text="dados.endereco?.logradouro + ', ' + dados.endereco?.numero"></span><br>
+            <span x-text="dados.endereco?.bairro"></span><br>
+            <span x-text="dados.endereco?.cidade + ' - ' + dados.endereco?.estado"></span><br>
+            <span x-text="'CEP: ' + dados.endereco?.cep"></span>
           </p>
           
           <p>
-        <strong><span class="material-icons" style="vertical-align: middle; font-size: 1.1em;">phone</span> Telefone:</strong><br>
-        (19) 99516-1006
+            <strong><span class="material-icons" style="vertical-align: middle; font-size: 1.1em;">phone</span> Telefone:</strong><br>
+            <span x-text="dados.contato?.telefone"></span>
           </p>
           
           <div class="botoes-navegacao">
-        <button class="botao-navegacao maps" onclick="window.open('https://maps.app.goo.gl/roQKMucnRyLw1yQy9', '_blank')">
-          <span class="material-icons">map</span>
-          Google Maps
-        </button>
-        <button class="botao-navegacao waze" onclick="window.open('https://waze.com/ul?q=R.+Rozalindo+de+Souza,+08,+Campinas&navigate=yes', '_blank')">
-          <span class="material-icons">navigation</span>
-          Waze
-        </button>
-        <button class="botao-navegacao uber" onclick="window.open('https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=R.%20Rozalindo%20de%20Souza,%2008,%20Residencial%20Cosmos,%20Campinas%20-%20SP,%2013059-582', '_blank')">
-          <span class="material-icons">directions_car</span>
-          Uber
-        </button>
+            <button class="botao-navegacao maps" @click="window.open(dados.localizacao?.googleMapsUrl, '_blank')">
+              <span class="material-icons">map</span>
+              Google Maps
+            </button>
+            <button class="botao-navegacao waze" @click="window.open(dados.localizacao?.wazeUrl, '_blank')">
+              <span class="material-icons">navigation</span>
+              Waze
+            </button>
+            <button class="botao-navegacao uber" @click="window.open(dados.localizacao?.uberUrl, '_blank')">
+              <span class="material-icons">directions_car</span>
+              Uber
+            </button>
           </div><!-- botoes-navegacao !-->
           
           <div class="horarios-cultos">
-        <h4 style="margin-bottom: var(--espacamento-xs); display: flex; align-items: center; gap: 8px;"><span class="material-icons">schedule</span>Horários dos Cultos</h4>
-        <p><strong>Sexta-feira:</strong> 20h00</p>
-        <p><strong>Domingo:</strong> 10h00</p>
-        <p style="margin-top: var(--espacamento-sm);">
-          <strong>Pastor:</strong> Rev. Enéias Mendes<br>
-          <a href="https://instagram.com/pr.eneiasmendes" target="_blank">@pr.eneiasmendes</a>
-        </p>
+            <h4 style="margin-bottom: var(--espacamento-xs); display: flex; align-items: center; gap: 8px;">
+              <span class="material-icons">schedule</span>Horários dos Cultos
+            </h4>
+            <template x-for="culto in dados.horarios?.cultos" :key="culto.dia">
+              <p><strong x-text="culto.dia + ':'"></strong> <span x-text="culto.horario"></span></p>
+            </template>
+            <p style="margin-top: var(--espacamento-sm);">
+              <strong>Pastor:</strong> <span x-text="dados.lideranca?.pastor?.nome"></span><br>
+              <a :href="dados.lideranca?.pastor?.instagramUrl" target="_blank" x-text="dados.lideranca?.pastor?.instagram"></a>
+            </p>
           </div><!-- horarios-cultos !-->
         </div><!-- info-localizacao !-->
       </div><!-- localizacao-content !-->
@@ -857,6 +865,7 @@
   </div><!-- acessibilidade-container !-->
   
   <!-- JavaScript -->
+  <script src="js/data-manager.js"></script>
   <script src="js/aplicacao.js"></script>
   <script src="js/api-integracao.js"></script>
   <script src="js/interface.js"></script>
