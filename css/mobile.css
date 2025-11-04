@@ -1028,6 +1028,10 @@
   font-size: 1.25rem;
 }
 
+.footer-rede-social i {
+  font-size: 1.25rem;
+}
+
 .footer-rede-social:hover {
   background: var(--dourado);
   color: var(--preto);
