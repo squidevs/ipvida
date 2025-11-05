@@ -220,6 +220,7 @@
 .botao-primario:hover {
   background: var(--verde-escuro);
   border-color: var(--verde-escuro);
+  color: var(--cinza-leve);
   transform: translateY(-2px);
   box-shadow: var(--sombra-media);
   text-decoration: none;
@@ -227,13 +228,14 @@
 
 .botao-secundario {
   background: var(--dourado);
-  color: var(--preto);
+  color: var(--branco);
   border-color: var(--dourado);
 }
 
 .botao-secundario:hover {
   background: var(--dourado-hover);
   border-color: var(--dourado-hover);
+  color: var(--branco);
   transform: translateY(-2px);
   box-shadow: var(--sombra-media);
   text-decoration: none;

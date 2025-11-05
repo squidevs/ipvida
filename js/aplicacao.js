@@ -188,6 +188,47 @@ function carrosselDevocionais() {
   };
 }
 
+// Devocional Diário com Imagem e Texto
+function devocionalDiario() {
+  return {
+    devocional: null,
+    textoExpandido: false,
+    
+    async carregar() {
+      try {
+        const timestamp = new Date().getTime();
+        const response = await fetch(`data/devocionais.json?v=${timestamp}`);
+        const dados = await response.json();
+        
+        if (dados.devocionaisDiarios && dados.devocionaisDiarios.length > 0) {
+          // Pega apenas os devocionais ativos
+          const ativos = dados.devocionaisDiarios.filter(d => d.ativo === true);
+          
+          if (ativos.length > 0) {
+            // Pega o primeiro ativo
+            this.devocional = ativos[0];
+            console.log('✅ Devocional diário carregado:', this.devocional.id);
+          } else {
+            console.log('⚠️ Nenhum devocional ativo encontrado');
+          }
+        }
+      } catch (erro) {
+        console.error('❌ Erro ao carregar devocional diário:', erro);
+      }
+    },
+    
+    get textoExibido() {
+      if (!this.devocional) return '';
+      
+      if (this.textoExpandido || this.devocional.texto.length <= 350) {
+        return this.devocional.texto;
+      }
+      
+      return this.devocional.texto.substring(0, 350) + '...';
+    }
+  };
+}
+
 // Vídeos YouTube e Live
 function videosYoutube() {
   return {

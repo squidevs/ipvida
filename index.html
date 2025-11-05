@@ -41,8 +41,8 @@
   <nav class="navbar">
     <div class="navbar-container">
       <div class="navbar-logo">
-        <img src="assets/images/logo-preto.png" alt="Logo IPV">
-        <span class="navbar-logo-texto">IPV Online</span>
+        <img src="assets/images/logo.svg" alt="Logo IPV">
+        <span class="navbar-logo-texto"></span>
       </div><!-- navbar-logo !-->
       
       <ul class="navbar-menu" :class="{ 'aberto': menuAberto }">
@@ -85,7 +85,7 @@
     <div class="hero-overlay"></div>
     
     <div class="hero-conteudo fade-in">
-      <img src="assets/images/logo-branco.png" width="250" alt="logo branca">
+      <img src="assets/images/logo-branco.svg" width="350" alt="logo branca">
       <p class="hero-subtitulo">
         Uma comunidade de fé, esperança e amor
         Venha nos visitar e conhecer mais sobre Jesus Cristo
@@ -150,12 +150,33 @@
   <!-- ==================== DEVOCIONAIS COM CARROSSEL ==================== -->
   <section id="devocionais" class="secao" style="background: var(--cinza-muito-claro);">
     <div class="container">
-      <h2 class="secao-titulo">Devocional Diário</h2>
+      <h2 class="secao-titulo">Devocional</h2>
       <p class="secao-subtitulo">
         Alimente sua fé com a Palavra de Deus todos os dias
       </p>
       
-      <div class="carrossel-devocionais" x-data="carrosselDevocionais()">
+      <!-- Devocional Diário -->
+      <div x-data="devocionalDiario()" x-init="carregar()">
+        <template x-if="devocional">
+          <div class="devocional-card">
+            <img :src="devocional.imagem" :alt="'Devocional ' + devocional.id" class="devocional-imagem">
+            <div class="devocional-conteudo">
+              <div class="devocional-texto" :class="{ 'expandido': textoExpandido }">
+                <p x-text="textoExibido"></p>
+              </div>
+              <button 
+                x-show="devocional.texto.length > 350" 
+                @click="textoExpandido = !textoExpandido"
+                class="botao botao-pequeno botao-outline"
+                style="margin-top: 15px;">
+                <span x-text="textoExpandido ? 'Ver Menos' : 'Ver Mais'"></span>
+              </button>
+            </div>
+          </div>
+        </template>
+      </div>
+      
+      <div class="carrossel-devocionais" x-data="carrosselDevocionais()" style="margin-top: 60px;">
         <div class="carrossel-slides">
           <!-- Slide 1: Versículo do Dia -->
           <div class="carrossel-slide" :class="{ 'ativo': slideAtual === 0 }">
@@ -775,7 +796,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-secao">
-          <img src="assets/images/logo-branco.png" alt="Logo IPV" style="height: 60px; margin-bottom: var(--espacamento-md);">
+          <img src="assets/images/logo-branco.svg" alt="Logo IPV" style="height: 60px; margin-bottom: var(--espacamento-md);">
           <p style="color: var(--cinza-leve); line-height: 1.8;">
             Igreja Presbiteriana Vida<br>
             Uma comunidade reformada<br>

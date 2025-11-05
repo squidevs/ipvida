@@ -30,7 +30,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(26, 71, 49, 0.815) 0%, rgba(45, 106, 79, 0.9) 100%);
+  background: linear-gradient(135deg, rgba(71, 26, 26, 0.797) 0%, rgba(45, 106, 79, 0.836) 100%);
 }
 
 .hero-conteudo {
@@ -193,6 +193,45 @@
   background: var(--verde-medio);
   width: 32px;
   border-radius: 6px;
+}
+
+/* ==================== DEVOCIONAL DIÁRIO ==================== */
+.devocional-card {
+  background: var(--branco);
+  border-radius: var(--borda-arredondada-lg);
+  overflow: hidden;
+  box-shadow: var(--sombra-media);
+  margin-top: var(--espacamento-lg);
+}
+
+.devocional-imagem {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  display: block;
+  background: var(--cinza-muito-claro);
+}
+
+.devocional-conteudo {
+  padding: var(--espacamento-lg);
+}
+
+.devocional-texto {
+  color: var(--cinza-escuro);
+  line-height: 1.8;
+  font-size: 1rem;
+  white-space: pre-line;
+  max-height: 200px;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.devocional-texto.expandido {
+  max-height: none;
+}
+
+.devocional-texto p {
+  margin: 0;
 }
 
 /* ==================== CARDS DE EVENTOS ==================== */
@@ -503,7 +542,8 @@
 .carrossel-programacao-slides {
   position: relative;
   width: 100%;
-  min-height: 550px;
+  aspect-ratio: 1 / 1;
+  min-height: unset;
 }
 
 .card-programacao-vertical {
@@ -531,7 +571,8 @@
 
 .card-programacao-imagem-full {
   position: relative;
-  height: 550px;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -539,6 +580,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   opacity: 0.95;
   transition: var(--transicao-padrao);
 }
@@ -1115,7 +1157,7 @@
   height: 56px;
   border-radius: 50%;
   background: var(--dourado);
-  color: var(--preto);
+  color: var(--branco);
   border: none;
   cursor: pointer;
   display: flex;

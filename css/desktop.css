@@ -57,6 +57,7 @@
 
   .carrossel-programacao-slides {
     min-height: 650px;
+    aspect-ratio: unset;
   }
 
   .card-programacao-imagem-full {
@@ -67,6 +68,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
   }
 
   .carrossel-seta-prog {

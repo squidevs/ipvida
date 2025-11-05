@@ -18,8 +18,8 @@ const urlsParaCachear = [
   '/js/acessibilidade.js',
   '/js/interface.js',
   '/js/api-integracao.js',
-  '/assets/images/logo-preto.png',
-  '/assets/images/logo-branco.png',
+  '/assets/images/logo.svg',
+  '/assets/images/logo-branco.svg',
   '/manifest.json'
 ];
 
@@ -108,8 +108,8 @@ self.addEventListener('push', evento => {
   const titulo = dados.titulo || 'IPV Online';
   const opcoes = {
     body: dados.body || 'Nova notificação da igreja',
-    icon: '/assets/images/logo-preto.png',
-    badge: '/assets/images/logo-preto.png',
+    icon: '/assets/images/logo.svg',
+    badge: '/assets/images/logo.svg',
     vibrate: [200, 100, 200],
     data: {
       url: dados.url || '/'
